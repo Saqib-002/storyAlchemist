@@ -26,24 +26,13 @@ body {
   }
 
   .btn {
-    @apply py-3 px-6 capitalize bg-transparent rounded-md relative z-[1] overflow-hidden border-0 border-transparent border-solid duration-300 transition-all ease-in-out;
+    @apply py-3 px-6 bg-transparent rounded-md relative z-[1] overflow-hidden border-0 border-transparent border-solid duration-300 transition-all ease-in-out;
   }
   .markdown {
     @apply max-w-full prose dark:prose-p:text-light-700 dark:prose-ol:text-light-700 dark:prose-ul:text-light-500 dark:prose-strong:text-white dark:prose-headings:text-white prose-headings:text-dark-400 prose-h1:text-dark-300 prose-h2:text-dark-300 prose-p:text-dark-500 prose-ul:text-dark-500 prose-ol:text-dark-500;
   }
   .nav-item {
     @apply text-dark-200;
-  }
-  .primary-gradient {
-    background: linear-gradient(129deg, #0c1132 0%, #182364 100%);
-  }
-
-  .dark-gradient {
-    background: linear-gradient(
-      232deg,
-      rgba(23, 28, 35, 0.41) 0%,
-      rgba(19, 22, 28, 0.7) 100%
-    );
   }
 
   .tab {
@@ -205,8 +194,8 @@ code {
   right: 0%;
 }
 .btn-tertiary {
-  border: 1px solid #a6b0f2;
-  color: #a6b0f2;
+  border: 1px solid #3045c9;
+  color: #3045c9;
 }
 .btn-tertiary::before {
   content: "";
@@ -274,7 +263,6 @@ code {
 .btn-quinary:hover {
   border: 0px solid #3045c9;
   color: #e8e9e9;
-  background-color: #3045c9;
 }
 .btn-quinary:hover::before {
   width: 100%;
@@ -330,7 +318,7 @@ code {
 .btn-ocotonary {
   border: 0px solid transparent;
   color: #e8e9e9;
-  background-color: #756cf5;
+  background-color: #4d62e5;
 }
 .btn-ocotonary::before {
   content: "";
@@ -347,7 +335,6 @@ code {
 .btn-ocotonary:hover {
   border: 0px solid #3045c9;
   color: #e8e9e9;
-  background-color: #3045c9;
 }
 .btn-ocotonary:hover::before {
   width: 100%;
@@ -357,7 +344,7 @@ code {
 .btn-nonary {
   border: 0px solid transparent;
   color: #e8e9e9;
-  background-color: #3045c9;
+  background-color: #4d62e5;
 }
 .btn-nonary::before {
   content: "";
@@ -367,14 +354,13 @@ code {
   bottom: 0px;
   width: 0%;
   height: 100%;
-  background-color: #756cf5;
+  background-color: #e8e9e9;
   z-index: -1;
   transition: all 0.4s ease-in-out;
 }
 .btn-nonary:hover {
-  border: 0px solid #756cf5;
-  color: #e8e9e9;
-  background-color: #756cf5;
+  border: 0px solid #e8e9e9;
+  color: #4d62e5;
 }
 .btn-nonary:hover::before {
   width: 100%;

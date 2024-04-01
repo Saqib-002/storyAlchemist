@@ -19,7 +19,7 @@ interface Props {
 const Button = ({ style, type, otherClasses, title }: Props) => {
   return (
     <>
-      <button className={`btn ${"btn-" + style}`} type={type}>
+      <button className={`btn ${"btn-" + style} ${otherClasses}`} type={type}>
         {title}
       </button>
     </>

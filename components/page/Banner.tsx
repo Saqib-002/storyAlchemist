@@ -8,17 +8,16 @@ const Banner = () => {
         <Image
           // priority
           src="/images/landing_img.png"
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
+          className="object-cover object-center"
+          fill={true}
           alt="hero image example"
         />
       </div>
-      <div className="flex-center relative size-full flex-col">
-        <h1 className="h1-bold max-w-[600px] text-primary-100/80">
+      <div className="flex-center relative size-full flex-col gap-6 text-center">
+        <h1 className="h1-bold max-w-[600px] text-dark-100/80">
           CREATE A PROFESSIONAL VIDEO WITH THE HELP OF AI
         </h1>
-        <p className="paragraph-regular max-w-[600px] text-primary-100/80">
+        <p className="paragraph-regular max-w-[600px] text-dark-100/80">
           Documentrio allows you to create documentary-style videos by using
           AI-generated scripts and voice-overs, showcasing your creativity. you
           can also modify it in the editor
