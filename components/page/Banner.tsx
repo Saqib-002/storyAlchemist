@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/CustomButton";
 import Image from "next/image";
 const Banner = () => {
   return (

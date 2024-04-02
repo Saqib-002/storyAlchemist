@@ -77,6 +77,8 @@
   .shadow-light100_darknone {
     @apply shadow-light-100 dark:shadow-none;
   }
+  /* Buttons */
+
   .primary-gradient {
     /* background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%); */
     background-image: radial-gradient(#001628, #00101d);

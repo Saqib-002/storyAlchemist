@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrostesk.className} ${montserat.className}`}>
-        <main className="primary-gradient h-screen w-screen overflow-y-scroll">
+        <main className="primary-gradient box-content min-h-screen w-full ">
           <Navbar />
           {children}
         </main>
