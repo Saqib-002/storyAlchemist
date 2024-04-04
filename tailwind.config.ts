@@ -103,11 +103,21 @@ const config = {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(0%)" },
         },
+        "anime-one": {
+          "0%": { opacity: "0.4", transform: "translateX(0px)" },
+          "100%": { opacity: "1", transform: "translateX(20px)" },
+        },
+        "anime-two": {
+          "0%": { opacity: "0.4", transform: "translateX(0px)" },
+          "100%": { opacity: "1", transform: "translateX(-20px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         header: "header 0.5s ease-out",
+        "anime-one": "anime-one 2s ease-in-out 0s infinite alternate",
+        "anime-two": "anime-two 2s ease-in-out 0s infinite alternate",
       },
     },
   },
