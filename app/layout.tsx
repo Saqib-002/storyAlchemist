@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 // eslint-disable-next-line camelcase
 import { Montserrat, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/shared/Navbar";
+import { Navbar } from "@/components/shared/Navbar/Navbar";
 import React from "react";
 
 const spaceGrostesk = Space_Grotesk({ subsets: ["vietnamese"] });

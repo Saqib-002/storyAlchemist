@@ -1,6 +1,6 @@
-import Banner from "@/components/page/Banner";
-import Broadcast from "@/components/page/Broadcast";
-import VoiceBanner from "@/components/page/VoiceBanner";
+import Banner from "@/components/page/home/Banner";
+import Broadcast from "@/components/page/home/Broadcast";
+import VoiceBanner from "@/components/page/home/VoiceBanner";
 import Tradition from "@/components/shared/Tradition";
 
 export default function Home() {

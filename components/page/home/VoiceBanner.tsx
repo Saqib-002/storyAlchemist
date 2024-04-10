@@ -1,5 +1,5 @@
 import React from "react";
-import VoiceCard from "../card/VoiceCard.card";
+import VoiceCard from "../../card/VoiceCard.card";
 
 const VOICE_CARD_DATA = [
   { title: "Product Designer", imgUrl: "/images/person.png" },
@@ -14,7 +14,7 @@ const VOICE_CARD_DATA = [
 
 const VoiceBanner = () => {
   return (
-    <section className="max-w-full p-20">
+    <section className="max-w-full p-4 md:p-20">
       <h1 className="h1-bold text-center text-dark-100/80">
         AI Voices in different Tones & Languages
       </h1>

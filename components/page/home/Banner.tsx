@@ -13,7 +13,7 @@ const Banner = () => {
           alt="hero image example"
         />
       </div>
-      <div className="flex-center relative size-full flex-col gap-6 text-center">
+      <div className="flex-center relative size-full flex-col gap-6 px-4 text-center">
         <h1 className="h1-bold max-w-[600px] text-dark-100/80">
           CREATE A PROFESSIONAL VIDEO WITH THE HELP OF AI
         </h1>
