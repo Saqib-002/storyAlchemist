@@ -4,6 +4,7 @@ import { Montserrat, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/shared/Navbar/Navbar";
 import React from "react";
+import Footer from "@/components/shared/Footer";
 
 const spaceGrostesk = Space_Grotesk({ subsets: ["vietnamese"] });
 const montserat = Montserrat({ subsets: ["latin"] });
@@ -24,6 +25,7 @@ export default function RootLayout({
         <main className="primary-gradient box-content min-h-screen w-full ">
           <Navbar />
           {children}
+          <Footer />S
         </main>
       </body>
     </html>

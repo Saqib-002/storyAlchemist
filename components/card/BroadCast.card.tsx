@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import CustomButton from "../shared/CustomButton";
+import { broadCastVariants } from "@/lib/animation";
+import { motion } from "framer-motion";
 
 interface Props {
   imgPos: "before" | "after";
@@ -8,7 +11,13 @@ interface Props {
 
 const BroadCastCard = ({ imgPos }: Props) => {
   return (
-    <div className="broadcast-grad no-scrollbar sticky top-[100px] z-10 h-fit overflow-y-scroll rounded-2xl px-8 py-28 md:px-20">
+    <motion.div
+      variants={broadCastVariants}
+      whileInView={"inView"}
+      className="broadcast-grad no-scrollbar sticky top-[100px] z-10 h-fit overflow-y-scroll rounded-2xl px-8 py-28 max-lg:h-[450px] md:px-20"
+      transition={{ duration: 0.3, type: "linear" }}
+      initial={"initial"}
+    >
       <Image
         src="/images/broadcast/anime-one.png"
         className="absolute !left-6  !top-6 z-40 max-h-[70px] max-w-[429px] animate-anime-one"
@@ -18,7 +27,7 @@ const BroadCastCard = ({ imgPos }: Props) => {
       />
       <Image
         src="/images/broadcast/anime-two.png"
-        className=" absolute !bottom-6  !right-6 z-40 max-h-[70px] max-w-[429px] animate-anime-two max-md:hidden"
+        className=" absolute !bottom-6  !right-6 z-40 max-h-[70px] max-w-[429px] animate-anime-two max-lg:hidden"
         width={429}
         height={72}
         alt="broadcast-anime-two"
@@ -26,7 +35,7 @@ const BroadCastCard = ({ imgPos }: Props) => {
       <div
         className={`flex-center gap-6 p-1 ${imgPos === "before" ? "flex-row-reverse" : ""} flex-wrap max-md:h-[300px] max-md:py-2`}
       >
-        <div className="flex max-w-[65%] flex-col gap-4 text-dark-100">
+        <div className="flex flex-col gap-4 text-dark-100 lg:max-w-[65%]">
           <h2 className="h1-bold">Commercial & Broadcast Rights</h2>
           <p>
             Your Text To Speech Synthesized Audio Files Are Securely Stored In
@@ -49,7 +58,7 @@ const BroadCastCard = ({ imgPos }: Props) => {
           className="size-[300px] max-h-full"
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
