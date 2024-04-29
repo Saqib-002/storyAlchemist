@@ -72,10 +72,12 @@ const config = {
         inset:
           "inset 1px 1px 0 0 #bcbcbc,inset -1px -1px 0 0 #fff,inset 1px -1px 0 0 #bcbcbc,inset -1px 1px 0 0 #bcbcbc",
         header: "0px 1px 4px 1px #000",
+        input: "0px 0px 0px 4px rgba(54,58,61,0.25)",
       },
       backgroundImage: {
         "auth-dark": "url('/assets/images/auth-dark.png')",
         "auth-light": "url('/assets/images/auth-light.png')",
+        "login-img": "url('/images/landing_img.png')",
       },
       backgroundSize: {
         auto: "auto",

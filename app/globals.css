@@ -63,6 +63,9 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.input-gradient {
+  background: linear-gradient(45deg, #82dbf7, #b6f09c);
+}
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 3px;
@@ -87,7 +90,18 @@ body {
 .markdown a {
   color: #1da1f2;
 }
-
+.hr-lines {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+.hr-lines::after,
+.hr-lines::before {
+  content: "";
+  height: 2px;
+  background-color: white;
+  display: block;
+}
 .markdown a,
 code {
   /* These are technically the same, but use both */
