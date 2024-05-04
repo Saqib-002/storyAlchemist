@@ -96,18 +96,27 @@ const Page = () => {
   }
   return (
     <>
-      <div className="grid min-h-screen grid-cols-2">
+      <div className="grid min-h-screen md:grid-cols-2">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="grid grid-cols-2 gap-4 px-20 py-4"
+            className="grid grid-cols-2 grid-rows-11-max gap-x-4 gap-y-6 px-20 py-4 max-xs:px-10"
           >
+            <Link
+              href="/"
+              className="my-10 text-xl text-light-700 duration-300 hover:text-light-400"
+            >
+              &#8592;
+            </Link>
             <h1 className="h1-bold col-span-2 text-light-700">Documentrio</h1>
+            <p className="col-span-2 text-light-700">
+              Welcome to the Documentrio
+            </p>
             <FormField
               control={form.control}
               name="firstName"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="max-lg:col-span-2">
                   <FormLabel className="mb-1 text-dark-300">
                     First Name
                   </FormLabel>
@@ -129,7 +138,7 @@ const Page = () => {
               control={form.control}
               name="lastName"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="max-lg:col-span-2">
                   <FormLabel className="mb-1 text-dark-300">
                     Last Name
                   </FormLabel>
@@ -151,7 +160,7 @@ const Page = () => {
               control={form.control}
               name="username"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="max-lg:col-span-2">
                   <FormLabel className="mb-1 text-dark-300">Username</FormLabel>
 
                   <FormControl>
@@ -171,7 +180,7 @@ const Page = () => {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="max-lg:col-span-2">
                   <FormLabel className="mb-1 text-dark-300">Email</FormLabel>
 
                   <FormControl>
@@ -191,7 +200,7 @@ const Page = () => {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="max-lg:col-span-2">
                   <FormLabel className="mb-1 text-dark-300">Password</FormLabel>
 
                   <FormControl>
@@ -211,7 +220,7 @@ const Page = () => {
               control={form.control}
               name="confirmPassword"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="max-lg:col-span-2">
                   <FormLabel className="mb-1 text-dark-300">
                     confirmPassword
                   </FormLabel>
@@ -251,7 +260,7 @@ const Page = () => {
             </span>
             <Button
               type="button"
-              className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500"
+              className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500 max-lg:col-span-2"
             >
               <Image
                 src="/icons/google.svg"
@@ -264,7 +273,7 @@ const Page = () => {
             </Button>
             <Button
               type="button"
-              className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500"
+              className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500 max-lg:col-span-2"
             >
               <Image
                 src="/icons/github.svg"
@@ -275,7 +284,7 @@ const Page = () => {
               />
               Github
             </Button>
-            <p className="col-span-2 text-light-700">
+            <p className="col-span-2 mb-5 text-light-700">
               Already have an account?{" "}
               <Link
                 href="/sign-in"
@@ -286,7 +295,7 @@ const Page = () => {
             </p>
           </form>
         </Form>
-        <div className="bg-login-img bg-cover"></div>
+        <div className="bg-login-img bg-cover max-md:hidden"></div>
       </div>
     </>
   );

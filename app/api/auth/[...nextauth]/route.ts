@@ -23,7 +23,6 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials, req) {
         const user = await getUserByEmail({ email: credentials?.email });
-        console.log("User", user);
         const passwordCorrect = await compare(
           credentials?.password || "",
           user.password

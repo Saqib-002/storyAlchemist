@@ -70,21 +70,27 @@ const Page = (req: NextRequest) => {
   }
   return (
     <>
-      <div className="grid min-h-screen grid-cols-2">
+      <div className="grid min-h-screen md:grid-cols-2">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="grid grid-cols-2 gap-4 px-20 py-4"
+            className="grid grid-cols-2 grid-rows-8-max gap-x-4 gap-y-6 px-20 py-4 max-xs:px-10"
           >
+            <Link
+              href="/"
+              className="my-10 text-xl text-light-700 duration-300 hover:text-light-400"
+            >
+              &#8592;
+            </Link>
             <h1 className="h1-bold col-span-2 text-light-700">Documentrio</h1>
             <p className="col-span-2 text-light-700">
-              Welcome to the Documentrio
+              Welcome back to the Documentrio
             </p>
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="max-lg:col-span-2">
                   <FormLabel className="mb-1 text-dark-300">Email</FormLabel>
 
                   <FormControl>
@@ -104,7 +110,7 @@ const Page = (req: NextRequest) => {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="max-lg:col-span-2">
                   <FormLabel className="mb-1 text-dark-300">Password</FormLabel>
 
                   <FormControl>
@@ -126,12 +132,12 @@ const Page = (req: NextRequest) => {
               style="ocotonary"
               otherClasses="h-max col-span-2"
             />
-            <span className="hr-lines col-span-2 px-2 text-center text-light-700">
+            <span className="hr-lines col-span-2 my-2 px-2 text-center text-light-700">
               or continue with
             </span>
             <Button
               type="button"
-              className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500"
+              className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500 max-lg:col-span-2"
               onClick={() =>
                 signIn("google", {
                   callbackUrl: "/dashboard",
@@ -149,7 +155,7 @@ const Page = (req: NextRequest) => {
             </Button>
             <Button
               type="button"
-              className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500"
+              className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500 max-lg:col-span-2"
               onClick={() =>
                 signIn("github", {
                   callbackUrl: "http://localhost:3000/dashboard",
@@ -176,7 +182,7 @@ const Page = (req: NextRequest) => {
             </p>
           </form>
         </Form>
-        <div className="bg-login-img bg-cover"></div>
+        <div className="bg-login-img bg-cover max-md:hidden"></div>
       </div>
     </>
   );

@@ -102,6 +102,13 @@ body {
   background-color: white;
   display: block;
 }
+
+@media screen and (max-width: 1024px) {
+  .hr-lines {
+    grid-template-columns: auto auto auto;
+  }
+}
+
 .markdown a,
 code {
   /* These are technically the same, but use both */

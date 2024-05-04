@@ -89,6 +89,10 @@ const config = {
       backgroundPosition: {
         "right-center": "right center",
       },
+      gridTemplateRows: {
+        "8-max": "repeat(8,minmax(min-content,max-content))",
+        "11-max": "repeat(11,minmax(min-content,max-content))",
+      },
       screens: {
         xs: "420px",
       },
