@@ -12,11 +12,9 @@ export interface IUser extends Document {
 const UserSchema = new Schema({
   firstName: {
     type: String,
-    required: [true, "must provide a username."],
   },
   lastName: {
     type: String,
-    required: [true, "must provide a username."],
   },
   username: {
     type: String,
@@ -25,12 +23,11 @@ const UserSchema = new Schema({
   },
   email: {
     type: String,
-    required: [true, "must provide a username."],
+    required: [true, "must provide a email."],
     unique: [true, "must be unique."],
   },
   password: {
     type: String,
-    required: [true, "must provide a username."],
   },
   joinedAt: { type: Date, default: Date.now },
 });

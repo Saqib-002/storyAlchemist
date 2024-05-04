@@ -18,11 +18,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import CustomButton from "@/components/shared/CustomButton";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
-  userName: z.string().min(4, {
+  username: z.string().min(4, {
     message: "Username must be at least 4 characters.",
   }),
   email: z.string().min(8, {
@@ -47,23 +49,50 @@ const formSchema = z.object({
 });
 
 const Page = () => {
+  const { data: session } = useSession();
+  if (session) {
+    redirect("/dashboard");
+  }
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
-      userName: "",
+      username: "",
       email: "",
       password: "",
       confirmPassword: "",
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { email, username, lastName, firstName, password, confirmPassword } =
+      values;
+    if (password !== confirmPassword) {
+      return;
+    }
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          username,
+          lastName,
+          firstName,
+          password,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      // Process response here
+      console.log("Registration Successful", response);
+    } catch (error: any) {
+      console.error("Registration Failed:", error);
+    }
   }
   return (
     <>
@@ -120,7 +149,7 @@ const Page = () => {
             />
             <FormField
               control={form.control}
-              name="userName"
+              name="username"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="mb-1 text-dark-300">Username</FormLabel>

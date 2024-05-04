@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -18,13 +18,9 @@ import CustomButton from "@/components/shared/CustomButton";
 import Image from "next/image";
 import Link from "next/link";
 import { NextRequest } from "next/server";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
-  userName: z.string().min(4, {
-    message: "Username must be at least 4 characters.",
-  }),
   email: z.string().min(8, {
     message: "email must be at least 8 characters.",
   }),
@@ -36,34 +32,41 @@ const formSchema = z.object({
     .max(30, {
       message: "password must be at less than 30 characters.",
     }),
-  confirmPassword: z
-    .string()
-    .min(8, {
-      message: "password must be at least 8 characters.",
-    })
-    .max(30, {
-      message: "password must be at less than 30 characters.",
-    }),
 });
 
 const Page = (req: NextRequest) => {
+  const { data: session } = useSession();
+  if (session) {
+    redirect("/dashboard");
+  }
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      userName: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { email, password } = values;
+
+    try {
+      console.log("As");
+      const response: any = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      console.log({ response });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      // Process response here
+      console.log("Login Successful", response);
+    } catch (error: any) {
+      console.error("Registration Failed:", error);
+    }
   }
   return (
     <>
@@ -129,7 +132,11 @@ const Page = (req: NextRequest) => {
             <Button
               type="button"
               className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500"
-              onClick={() => signIn("google")}
+              onClick={() =>
+                signIn("google", {
+                  callbackUrl: "/dashboard",
+                })
+              }
             >
               <Image
                 src="/icons/google.svg"
@@ -143,7 +150,11 @@ const Page = (req: NextRequest) => {
             <Button
               type="button"
               className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500"
-              onClick={() => signIn("github")}
+              onClick={() =>
+                signIn("github", {
+                  callbackUrl: "http://localhost:3000/dashboard",
+                })
+              }
             >
               <Image
                 src="/icons/github.svg"
