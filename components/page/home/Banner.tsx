@@ -3,7 +3,7 @@ import Button from "@/components/shared/CustomButton";
 import Image from "next/image";
 const Banner = () => {
   return (
-    <div className="relative z-10 h-screen w-full">
+    <section className="relative z-10 h-screen w-full">
       <div className="">
         <Image
           // priority
@@ -24,7 +24,7 @@ const Banner = () => {
         </p>
         <Button style="senary" type="button" title="Get Started" />
       </div>
-    </div>
+    </section>
   );
 };
 

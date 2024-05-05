@@ -5,8 +5,16 @@ import Image from "next/image";
 import { Button } from "../../ui/button";
 import MobileNav from "./MobileNav";
 import { AnimatePresence } from "framer-motion";
+import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
+import AvatarDropdown from "../AvatarDropdown";
 
 export const Navbar = () => {
+  const { data: session } = useSession();
+  console.log(session);
+  if (session === null) {
+    redirect("/login");
+  }
   const [scrollY, setScrollY] = useState<number>();
   const [isNavOpen, setIsNavOpen] = useState<Boolean>(false);
   useEffect(() => {
@@ -51,13 +59,20 @@ export const Navbar = () => {
           </li>
         </ul>
         <div className="flex-center gap-6 ">
-          <CustomButton
-            style="secondary"
-            type="button"
-            title="Sign Up"
-            href="/sign-up"
-            otherClasses="hidden md:inline"
-          />
+          {session ? (
+            <AvatarDropdown
+              imgSrc={session?.user?.image}
+              username={session?.user?.name}
+            />
+          ) : (
+            <CustomButton
+              style="secondary"
+              type="button"
+              title="Sign Up"
+              href="/sign-up"
+              otherClasses="hidden md:inline"
+            />
+          )}
           <Button
             size="icon"
             className=" !bg-transparent lg:hidden"
