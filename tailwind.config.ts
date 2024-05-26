@@ -78,6 +78,7 @@ const config = {
         "auth-dark": "url('/assets/images/auth-dark.png')",
         "auth-light": "url('/assets/images/auth-light.png')",
         "login-img": "url('/images/landing_img.png')",
+        dashboard: "url('/images/dashboard-bg.png')",
       },
       backgroundSize: {
         auto: "auto",
@@ -92,6 +93,9 @@ const config = {
       gridTemplateRows: {
         "8-max": "repeat(8,minmax(min-content,max-content))",
         "11-max": "repeat(11,minmax(min-content,max-content))",
+      },
+      gridTemplateColumns: {
+        "2-max": "max-content auto",
       },
       screens: {
         xs: "420px",

@@ -50,6 +50,9 @@ export const authOptions: AuthOptions = {
       return true;
     },
   },
+  pages: {
+    signIn: "sign-in",
+  },
 };
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

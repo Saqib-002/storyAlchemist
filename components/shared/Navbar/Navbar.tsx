@@ -5,16 +5,12 @@ import Image from "next/image";
 import { Button } from "../../ui/button";
 import MobileNav from "./MobileNav";
 import { AnimatePresence } from "framer-motion";
-import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import AvatarDropdown from "../AvatarDropdown";
 
 export const Navbar = () => {
   const { data: session } = useSession();
-  console.log(session);
-  if (session === null) {
-    redirect("/login");
-  }
+
   const [scrollY, setScrollY] = useState<number>();
   const [isNavOpen, setIsNavOpen] = useState<Boolean>(false);
   useEffect(() => {

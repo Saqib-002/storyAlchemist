@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 interface Props {
@@ -18,8 +19,18 @@ interface Props {
   type?: "submit" | "reset" | "button" | undefined;
   title: string;
   href?: string;
+  imgUrl?: string;
+  imgClasses?: string;
 }
-const CustomButton = ({ style, type, otherClasses, title, href }: Props) => {
+const CustomButton = ({
+  style,
+  type,
+  otherClasses,
+  title,
+  href,
+  imgUrl,
+  imgClasses,
+}: Props) => {
   return (
     <>
       {href ? (
@@ -28,9 +39,18 @@ const CustomButton = ({ style, type, otherClasses, title, href }: Props) => {
         </Link>
       ) : (
         <button
-          className={`btn  ${"btn-" + style} ${otherClasses}`}
+          className={`btn  ${"btn-" + style} ${otherClasses} ${imgUrl ? "flex items-center gap-2" : ""}`}
           type={type}
         >
+          {imgUrl && (
+            <Image
+              className={imgClasses}
+              src={imgUrl}
+              alt="img"
+              width={16}
+              height={16}
+            />
+          )}
           {title}
         </button>
       )}
