@@ -6,6 +6,7 @@ import React from "react";
 import Provider from "./ClientProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { Toaster } from "@/components/ui/toaster";
 
 const spaceGrostesk = Space_Grotesk({ subsets: ["vietnamese"] });
 const montserat = Montserrat({ subsets: ["latin"] });
@@ -25,6 +26,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${spaceGrostesk.className} ${montserat.className}`}>
         <Provider session={session}>{children}</Provider>
+        <Toaster />
       </body>
     </html>
   );

@@ -17,3 +17,20 @@ export const sidebarLinks: SidebarLink[] = [
     label: "My Videos",
   },
 ];
+export const AUDIOS = [
+  {
+    src: "/voices/john.mp3",
+    value: "john",
+    label: "John Doe - Deep",
+  },
+  {
+    src: "/voices/nassim.mp3",
+    value: "nassim",
+    label: "Nassim - Corporate Narration",
+  },
+  {
+    src: "/voices/hope.mp3",
+    value: "hope",
+    label: "Hope - upbeat and clear",
+  },
+];

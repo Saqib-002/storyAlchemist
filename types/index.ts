@@ -3,3 +3,8 @@ export interface SidebarLink {
   route: string;
   label: string;
 }
+export interface IAudios {
+  src: string;
+  value: string;
+  label: string;
+}

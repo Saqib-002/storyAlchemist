@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -8,24 +9,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
-interface Props {
-  username: string | undefined | null;
-  imgSrc: string | undefined | null;
-}
-
-const AvatarDropdown = ({ username, imgSrc }: Props) => {
+const AvatarDropdown = () => {
+  const { data: session } = useSession();
+  if (session === null) return null;
+  const user = session.user;
   return (
     <div className="flex items-center">
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger>
           <Avatar>
-            <AvatarImage src={imgSrc!} />
+            <AvatarImage src={user?.image!} />
             <AvatarFallback className="border-2 border-solid border-primary-300 bg-primary-800">
-              {username ? username[0].toUpperCase() : "A"}
+              {user?.name ? user?.name[0].toUpperCase() : "A"}
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
@@ -60,7 +59,7 @@ const AvatarDropdown = ({ username, imgSrc }: Props) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <span className="ml-3">{username}</span>
+      <span className="ml-3">{user?.name}</span>
     </div>
   );
 };

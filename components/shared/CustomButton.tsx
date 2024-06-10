@@ -21,6 +21,8 @@ interface Props {
   href?: string;
   imgUrl?: string;
   imgClasses?: string;
+  imgLoc?: "before" | "after";
+  onClick?: () => void;
 }
 const CustomButton = ({
   style,
@@ -30,6 +32,8 @@ const CustomButton = ({
   href,
   imgUrl,
   imgClasses,
+  imgLoc,
+  onClick,
 }: Props) => {
   return (
     <>
@@ -39,12 +43,13 @@ const CustomButton = ({
         </Link>
       ) : (
         <button
-          className={`btn  ${"btn-" + style} ${otherClasses} ${imgUrl ? "flex items-center gap-2" : ""}`}
+          className={`btn no-focus group  ${"btn-" + style} ${otherClasses} ${imgUrl ? "flex items-center gap-2" : ""} ${imgLoc === "after" ? "flex-row-reverse" : ""}`}
+          onClick={onClick}
           type={type}
         >
           {imgUrl && (
             <Image
-              className={imgClasses}
+              className={`group-hover:invert ${imgClasses}`}
               src={imgUrl}
               alt="img"
               width={16}

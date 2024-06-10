@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@/components/shared/CustomButton";
+import CustomButton from "@/components/shared/CustomButton";
 import Image from "next/image";
 const Banner = () => {
   return (
@@ -22,7 +22,7 @@ const Banner = () => {
           AI-generated scripts and voice-overs, showcasing your creativity. you
           can also modify it in the editor
         </p>
-        <Button style="senary" type="button" title="Get Started" />
+        <CustomButton style="senary" type="button" title="Get Started" />
       </div>
     </section>
   );

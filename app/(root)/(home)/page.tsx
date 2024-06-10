@@ -5,7 +5,6 @@ import VoiceBanner from "@/components/page/home/VoiceBanner";
 import Tradition from "@/components/shared/Tradition";
 
 export default function Home() {
-  console.log("s");
   return (
     <>
       <Banner />

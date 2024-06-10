@@ -1,22 +1,14 @@
-"use client";
+import CreateVideo from "@/components/page/dashboard/CreateVideo";
 import AvatarDropdown from "@/components/shared/AvatarDropdown";
 import CustomButton from "@/components/shared/CustomButton";
 import Sidebar from "@/components/shared/Navbar/Sidebar";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { getUserByEmail } from "@/lib/actions/user.action";
+import { getServerSession } from "next-auth";
 import React from "react";
 
-const Dashboard = () => {
-  const { data: session } = useSession();
-  if (session === null) {
-    redirect("/sign-in");
-  }
-  const getResponse = async () => {
-    await fetch("/api/gemini").then((res) => {
-      console.log(res);
-      console.log(res.text());
-    });
-  };
+async function Dashboard() {
+  const session = await getServerSession();
+  const user = await getUserByEmail({ email: session?.user?.email });
   return (
     <div className="grid h-screen grid-cols-2-max text-light-700">
       <Sidebar />
@@ -30,18 +22,13 @@ const Dashboard = () => {
               title="upgrade"
               imgClasses="invert"
             />
-            <AvatarDropdown
-              imgSrc={session.user?.image}
-              username={session.user?.name}
-            />
+            <AvatarDropdown />
           </div>
         </div>
-        <div className="h-full">
-          <button onClick={getResponse}>Click</button>
-        </div>
+        <CreateVideo userId={user._id.toString()} />
       </div>
     </div>
   );
-};
+}
 
 export default Dashboard;
