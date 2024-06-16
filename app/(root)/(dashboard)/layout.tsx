@@ -1,18 +1,18 @@
-import CreateVideo from "@/components/page/dashboard/CreateVideo";
 import AvatarDropdown from "@/components/shared/AvatarDropdown";
 import CustomButton from "@/components/shared/CustomButton";
 import Sidebar from "@/components/shared/Navbar/Sidebar";
-import { getUserByEmail } from "@/lib/actions/user.action";
-import { getServerSession } from "next-auth";
+import { Toaster } from "@/components/ui/toaster";
 import React from "react";
 
-async function Dashboard() {
-  const session = await getServerSession();
-  const user = await getUserByEmail({ email: session?.user?.email });
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <div className="grid h-screen grid-cols-2-max text-light-700">
+    <main className="primary-gradient box-content flex  h-screen  max-h-screen w-full  overflow-hidden text-light-700">
       <Sidebar />
-      <div className=" bg-dashboard">
+      <div className="flex w-full flex-col">
         <div className="flex items-center justify-between p-4">
           <p>Documentrio</p>
           <div className="flex h-max gap-4">
@@ -25,10 +25,9 @@ async function Dashboard() {
             <AvatarDropdown />
           </div>
         </div>
-        <CreateVideo userId={user._id.toString()} />
+        {children}
       </div>
-    </div>
+      <Toaster />
+    </main>
   );
 }
-
-export default Dashboard;

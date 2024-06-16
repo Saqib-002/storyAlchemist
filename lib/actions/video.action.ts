@@ -1,22 +1,23 @@
-import User from "@/database/user.model";
+"use server";
+import Video from "@/database/video.model";
 import { connectToDatabase } from "../mongoose";
 
-export async function createUser(userData: any) {
+export async function createVideo(videoData: any) {
   try {
     connectToDatabase();
-    const newUser = await User.create(userData);
-    return newUser;
+    const newVideo = await Video.create(videoData);
+    return JSON.stringify(newVideo);
   } catch (error) {
     console.log(error);
     throw error;
   }
 }
-export async function getUserByEmail(params: any) {
+export async function getUserVideos(params: any) {
   try {
     await connectToDatabase();
-    const { email } = params;
-    const user = await User.findOne({ email });
-    return user;
+    const { userId } = params;
+    const videos = await Video.find({ user: userId });
+    return videos;
   } catch (error) {
     console.log(error);
     throw error;

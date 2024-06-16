@@ -15,18 +15,19 @@ import { Textarea } from "@/components/ui/textarea";
 import CustomButton from "@/components/shared/CustomButton";
 import { useToast } from "@/components/ui/use-toast";
 import OptionDialogue from "./OptionDialogue";
+import { createVideo } from "@/lib/actions/video.action";
 
 const formSchema = z.object({
-  prompt: z.string().min(2).max(50),
-  voice: z.string().min(2).max(50),
+  prompt: z.string().min(2, "Enter a valid prompt").max(50),
+  voice: z.string().min(2, "one of the voice should be selected").max(50),
 });
 interface Props {
   userId: string;
-  voice: string;
 }
 function CreateVideo({ userId }: Props) {
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [preSignedUrl, setPreSignedUrl] = useState<string>("");
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,7 +38,7 @@ function CreateVideo({ userId }: Props) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await fetch("/api/createVideo", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,20 +47,28 @@ function CreateVideo({ userId }: Props) {
           userId,
           ...values,
         }),
-      })
-        .then(async (res) => {
-          return await res.json();
-        })
-        .then((data) => {
-          console.log(data);
-        });
+      });
+      const result = await response.json();
+      const newVid = await createVideo({ ...result, user: userId });
+      const newVideo = JSON.parse(newVid).videos.final;
+      const urlResponse = await fetch(`/api/getPresignedUrl`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          path: newVideo,
+        }),
+      });
+      const { url } = await urlResponse.json();
+      console.log(url);
+      setPreSignedUrl(url);
     } catch (error) {
       console.log(error);
     }
   }
   const handleSubmitPrompt = () => {
     const values = form.getValues();
-    console.log(values);
     if (values.prompt.length <= 2) {
       toast({
         variant: "destructive",
@@ -70,46 +79,61 @@ function CreateVideo({ userId }: Props) {
     }
   };
   return (
-    <div className="h-full">
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex-center mx-auto w-max flex-col gap-4"
-        >
-          <FormField
-            control={form.control}
-            name="prompt"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Textarea
-                    placeholder="Give me a simple prompt or detailed instructions"
-                    className="no-focus w-[600px] resize-none border-primary-200 bg-dark-600"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <CustomButton
-            style="nonary"
-            type="button"
-            onClick={() => handleSubmitPrompt()}
-            title="Create Video"
-            imgUrl="/icons/star.svg"
-            imgLoc="after"
-            otherClasses="self-end"
-          />
-          {isDialogOpen && (
-            <OptionDialogue
-              form={form}
-              isDialogOpen={isDialogOpen}
-              handleSubmitPrompt={handleSubmitPrompt}
+    <div className="flex-center h-full">
+      {preSignedUrl ? (
+        <>
+          <video width="320" height="240" controls preload="none">
+            <source src={preSignedUrl} type="video/mp4" />
+            <track
+              src="/path/to/captions.vtt"
+              kind="subtitles"
+              srcLang="en"
+              label="English"
             />
-          )}
-        </form>
-      </Form>
+            Your browser does not support the video tag.
+          </video>
+        </>
+      ) : (
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex-center mx-auto w-max flex-col gap-4"
+          >
+            <FormField
+              control={form.control}
+              name="prompt"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Give me a simple prompt or detailed instructions"
+                      className="no-focus w-[600px] resize-none border-primary-200 bg-dark-600"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <CustomButton
+              style="nonary"
+              type="button"
+              onClick={() => handleSubmitPrompt()}
+              title="Create Video"
+              imgUrl="/icons/star.svg"
+              imgLoc="after"
+              otherClasses="self-end"
+            />
+            {isDialogOpen && (
+              <OptionDialogue
+                form={form}
+                isDialogOpen={isDialogOpen}
+                handleSubmitPrompt={handleSubmitPrompt}
+              />
+            )}
+          </form>
+        </Form>
+      )}
     </div>
   );
 }

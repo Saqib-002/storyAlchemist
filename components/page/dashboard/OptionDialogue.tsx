@@ -2,7 +2,12 @@ import React, { useRef, useState } from "react";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { FormControl, FormField, FormItem } from "@/components/ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import CustomButton from "@/components/shared/CustomButton";
 import { AUDIOS } from "@/constants";
 import { IAudios } from "@/types";
@@ -92,6 +97,7 @@ const OptionDialogue = ({ form, handleSubmitPrompt }: any) => {
                   })}
                 </RadioGroup>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
