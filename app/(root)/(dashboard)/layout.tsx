@@ -2,6 +2,7 @@ import AvatarDropdown from "@/components/shared/AvatarDropdown";
 import CustomButton from "@/components/shared/CustomButton";
 import Sidebar from "@/components/shared/Navbar/Sidebar";
 import { Toaster } from "@/components/ui/toaster";
+import Link from "next/link";
 import React from "react";
 
 export default function RootLayout({
@@ -22,6 +23,9 @@ export default function RootLayout({
               title="upgrade"
               imgClasses="invert"
             />
+            <Link href="/dashboard" className="btn btn-secondary">
+              Create new
+            </Link>
             <AvatarDropdown />
           </div>
         </div>

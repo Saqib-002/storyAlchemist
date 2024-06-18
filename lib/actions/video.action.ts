@@ -23,3 +23,14 @@ export async function getUserVideos(params: any) {
     throw error;
   }
 }
+export async function getVideoById(params: any) {
+  try {
+    await connectToDatabase();
+    const { videoId } = params;
+    const videos = await Video.findById(videoId);
+    return videos;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}

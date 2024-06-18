@@ -16,6 +16,8 @@ import CustomButton from "@/components/shared/CustomButton";
 import { useToast } from "@/components/ui/use-toast";
 import OptionDialogue from "./OptionDialogue";
 import { createVideo } from "@/lib/actions/video.action";
+import VideoPlayer from "@/components/shared/VideoPlayer";
+import { getPresignedUrl } from "@/lib/utils";
 
 const formSchema = z.object({
   prompt: z.string().min(2, "Enter a valid prompt").max(50),
@@ -27,7 +29,13 @@ interface Props {
 function CreateVideo({ userId }: Props) {
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const [preSignedUrl, setPreSignedUrl] = useState<string>("");
+  const [preSignedUrl, setPreSignedUrl] = useState<{
+    url: string;
+    thumbUrl: string;
+  }>({
+    url: "",
+    thumbUrl: "",
+  });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,19 +58,10 @@ function CreateVideo({ userId }: Props) {
       });
       const result = await response.json();
       const newVid = await createVideo({ ...result, user: userId });
-      const newVideo = JSON.parse(newVid).videos.final;
-      const urlResponse = await fetch(`/api/getPresignedUrl`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          path: newVideo,
-        }),
-      });
-      const { url } = await urlResponse.json();
-      console.log(url);
-      setPreSignedUrl(url);
+      const newVideo = JSON.parse(newVid);
+      const url = await getPresignedUrl(newVideo.videos.final);
+      const thumbUrl = await getPresignedUrl(newVideo.images[0][0]);
+      setPreSignedUrl({ url, thumbUrl });
     } catch (error) {
       console.log(error);
     }
@@ -80,18 +79,13 @@ function CreateVideo({ userId }: Props) {
   };
   return (
     <div className="flex-center h-full">
-      {preSignedUrl ? (
+      {preSignedUrl.url !== "" ? (
         <>
-          <video width="320" height="240" controls preload="none">
-            <source src={preSignedUrl} type="video/mp4" />
-            <track
-              src="/path/to/captions.vtt"
-              kind="subtitles"
-              srcLang="en"
-              label="English"
-            />
-            Your browser does not support the video tag.
-          </video>
+          <VideoPlayer
+            videoSrc={preSignedUrl.url}
+            imgUrl={preSignedUrl.thumbUrl}
+            title=""
+          />
         </>
       ) : (
         <Form {...form}>

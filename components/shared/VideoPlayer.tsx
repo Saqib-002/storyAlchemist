@@ -5,9 +5,10 @@ import ReactPlayer from "react-player/lazy";
 interface Props {
   videoSrc: string;
   imgUrl: string;
+  title: string;
 }
 
-const VideoPlayer = ({ videoSrc, imgUrl }: Props) => {
+const VideoPlayer = ({ videoSrc, imgUrl, title }: Props) => {
   const [hasWindow, setHasWindow] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -29,7 +30,7 @@ const VideoPlayer = ({ videoSrc, imgUrl }: Props) => {
         <div
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="size-max cursor-pointer overflow-hidden rounded-lg  transition-transform duration-300 hover:scale-105"
+          className="size-max cursor-pointer transition-transform duration-300  hover:scale-105 [&>div]:size-max [&>div]:overflow-hidden [&>div]:rounded-lg"
         >
           <ReactPlayer
             onContextMenu={(e: any) => {
@@ -52,7 +53,7 @@ const VideoPlayer = ({ videoSrc, imgUrl }: Props) => {
             pip={true}
           />
           <source src={videoSrc} type="video/mp4" />
-          <p className="my-4 text-center text-light-400">Title</p>
+          {title && <p className="my-4 text-center text-light-400">{title}</p>}
         </div>
       )}
     </>

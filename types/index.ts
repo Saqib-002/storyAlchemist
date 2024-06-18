@@ -8,3 +8,6 @@ export interface IAudios {
   value: string;
   label: string;
 }
+export interface ParamsProps {
+  params: { id: string };
+}
