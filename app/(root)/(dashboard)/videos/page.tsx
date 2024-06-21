@@ -12,7 +12,6 @@ const Page = async () => {
   const user = await getUserByEmail({ email: session?.user?.email });
   const videos = await getUserVideos({ userId: user._id.toString() });
   // Fetch all video and thumbnail URLs asynchronously
-  console.log(videos);
   const videosWithUrls = await Promise.all(
     videos.map(async ({ videos, images, _id }) => {
       const url = await getPresignedUrl(videos.final);
