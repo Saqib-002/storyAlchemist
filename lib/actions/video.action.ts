@@ -28,7 +28,7 @@ export async function getVideoById(params: any) {
     await connectToDatabase();
     const { videoId } = params;
     const videos = await Video.findById(videoId);
-    return videos;
+    return JSON.stringify(videos);
   } catch (error) {
     console.log(error);
     throw error;

@@ -18,7 +18,7 @@ const cloudfront = new AWS.CloudFront.Signer(
 );
 function generateSignedUrl(key: string) {
   const url = `https://${process.env.CLOUDFRONT_DOMAIN}/${key}`;
-  const expires = Math.floor((Date.now() + 3600 * 1000) / 1000); // 60 seconds expiry
+  const expires = Math.floor((Date.now() + 3600 * 1000) / 1000); // 3600 seconds expiry
 
   return cloudfront.getSignedUrl({
     url,

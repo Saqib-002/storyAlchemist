@@ -1,14 +1,15 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MutableRefObject } from "react";
 import ReactPlayer from "react-player/lazy";
 
 interface Props {
+  ref?: MutableRefObject<null>;
   videoSrc: string;
-  imgUrl: string;
+  imgUrl?: string;
   title: string;
 }
 
-const VideoPlayer = ({ videoSrc, imgUrl, title }: Props) => {
+const VideoPlayer = ({ ref, videoSrc, imgUrl, title }: Props) => {
   const [hasWindow, setHasWindow] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -33,6 +34,7 @@ const VideoPlayer = ({ videoSrc, imgUrl, title }: Props) => {
           className="size-max cursor-pointer transition-transform duration-300  hover:scale-105 [&>div]:size-max [&>div]:overflow-hidden [&>div]:rounded-lg"
         >
           <ReactPlayer
+            ref={ref}
             onContextMenu={(e: any) => {
               e.preventDefault();
             }}
