@@ -9,10 +9,6 @@ import React, { useEffect, useState } from "react";
 const Page = ({ params }: ParamsProps) => {
   const [videoUrl, setVideoUrl] = useState("");
   const [thumbUrl, setThumbUrl] = useState("");
-  // console.log(video.videos.final);
-  // console.log(video.images[0][0]);
-  // console.log(videoUrl);
-  // console.log(thumbUrl);
   useEffect(() => {
     const getData = async () => {
       const videoResponse = await getVideoById({ videoId: params.id });
@@ -29,7 +25,7 @@ const Page = ({ params }: ParamsProps) => {
       <VideoPlayer videoSrc={videoUrl} imgUrl={thumbUrl} title="" />
       <div className="flex  gap-8">
         <Link
-          href={`/videos/edit/${params.id}`}
+          href={`/edit/${params.id}`}
           className="btn btn-quaternary block overflow-hidden rounded-sm"
         >
           Edit

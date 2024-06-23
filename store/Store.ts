@@ -520,8 +520,10 @@ export class Store {
   addVideo(index: number) {
     const videoElement = document.getElementById(`video-${index}`);
     if (!isHtmlVideoElement(videoElement)) {
+      console.log("addvideo if");
       return;
     }
+    console.log("addvideo", videoElement.src);
     const videoDurationMs = videoElement.duration * 1000;
     const aspectRatio = videoElement.videoWidth / videoElement.videoHeight;
     const id = getUid();
