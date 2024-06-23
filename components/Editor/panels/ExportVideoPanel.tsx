@@ -17,7 +17,7 @@ export const ExportVideoPanel = observer(() => {
           <div className="mr-2 text-xs font-semibold">Video Length:</div>
           <input
             type="number"
-            className="mr-2 max-w-[50px] rounded border-slate-200 text-center placeholder:text-slate-400 contrast-more:border-slate-400 contrast-more:placeholder:text-slate-500"
+            className="mr-2 max-w-[50px] rounded border-slate-200 bg-primary-700 text-center placeholder:text-dark-100 contrast-more:border-slate-400 contrast-more:placeholder:text-slate-500"
             value={store.maxTime / 1000}
             onChange={(e) => {
               const value = e.target.value;
@@ -61,7 +61,7 @@ export const ExportVideoPanel = observer(() => {
       </div>
 
       <button
-        className="m-4 rounded-lg bg-gray-500 p-1 font-bold text-white hover:bg-gray-700"
+        className="btn btn-nonary m-4 rounded-lg p-1 font-bold"
         onClick={() => {
           store.handleSeek(0);
           store.setSelectedElement(null);

@@ -18,21 +18,24 @@ export const Menu = observer(() => {
   const store = React.useContext(StoreContext);
 
   return (
-    <ul className="h-full bg-white">
+    <ul className="h-full bg-primary-950">
       {MENU_OPTIONS.map((option) => {
         const isSelected = store.selectedMenuOption === option.name;
         return (
           <li
             key={option.name}
-            className={`flex size-[72px] flex-col items-center justify-center ${isSelected ? "bg-slate-200" : ""}`}
+            className={`flex size-[72px] flex-col items-center justify-center gap-1 ${isSelected ? "bg-primary-800" : ""}`}
           >
             <button
               onClick={() => option.action(store)}
               className={`flex flex-col items-center`}
             >
-              <option.icon size="20" color={isSelected ? "#000" : "#444"} />
+              <option.icon
+                size="20"
+                color={isSelected ? "#CDCECF" : "#E8E9E9"}
+              />
               <div
-                className={`text-[0.6rem] hover:text-black ${isSelected ? "text-black" : "text-slate-600"}`}
+                className={`text-[0.6rem] hover:text-dark-200 ${isSelected ? "text-dark-200" : "text-dark-100"}`}
               >
                 {option.name}
               </div>

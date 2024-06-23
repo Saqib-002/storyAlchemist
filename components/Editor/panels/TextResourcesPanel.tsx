@@ -58,8 +58,8 @@ const TEXT_RESOURCES = [
 
 export const TextResourcesPanel = observer(() => {
   return (
-    <div className="h-full bg-slate-200">
-      <div className="px-[16px] pb-[8px] pt-[16px] text-sm font-semibold text-black">
+    <div className="h-full bg-primary-800 text-dark-100">
+      <div className="px-[16px] pb-[8px] pt-[16px] text-sm font-semibold">
         Text
       </div>
       <ul>

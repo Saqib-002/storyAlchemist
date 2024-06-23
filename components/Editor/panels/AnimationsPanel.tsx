@@ -36,7 +36,7 @@ export const AnimationsPanel = observer(() => {
       </div>
       {selectedElement && !hasFadeInAnimation ? (
         <div
-          className="cursor-pointer px-[16px] py-[8px] text-sm font-semibold hover:bg-slate-700 hover:text-white"
+          className="cursor-pointer px-[16px] py-[8px] text-sm font-semibold hover:bg-primary-700 "
           onClick={() => {
             store.addAnimation({
               id: getUid(),
@@ -52,7 +52,7 @@ export const AnimationsPanel = observer(() => {
       ) : null}
       {selectedElement && !hasFadeOutAnimation ? (
         <div
-          className="cursor-pointer px-[16px] py-[8px] text-sm font-semibold hover:bg-slate-700 hover:text-white"
+          className="cursor-pointer px-[16px] py-[8px] text-sm font-semibold hover:bg-primary-700 hover:text-white"
           onClick={() => {
             store.addAnimation({
               id: getUid(),
@@ -68,7 +68,7 @@ export const AnimationsPanel = observer(() => {
       ) : null}
       {selectedElement && !hasSlideInAnimation ? (
         <div
-          className="cursor-pointer px-[16px] py-[8px] text-sm font-semibold hover:bg-slate-700 hover:text-white"
+          className="cursor-pointer px-[16px] py-[8px] text-sm font-semibold hover:bg-primary-700 hover:text-white"
           onClick={() => {
             store.addAnimation({
               id: getUid(),
@@ -88,7 +88,7 @@ export const AnimationsPanel = observer(() => {
       ) : null}
       {selectedElement && !hasSlideOutAnimation ? (
         <div
-          className="cursor-pointer px-[16px] py-[8px] text-sm font-semibold hover:bg-slate-700 hover:text-white"
+          className="cursor-pointer px-[16px] py-[8px] text-sm font-semibold hover:bg-primary-700 hover:text-white"
           onClick={() => {
             store.addAnimation({
               id: getUid(),
@@ -108,7 +108,7 @@ export const AnimationsPanel = observer(() => {
       ) : null}
       {selectedElement && !hasConsantAnimation ? (
         <div
-          className="cursor-pointer px-[16px] py-[8px] text-sm font-semibold hover:bg-slate-700 hover:text-white"
+          className="cursor-pointer px-[16px] py-[8px] text-sm font-semibold hover:bg-primary-700 hover:text-white"
           onClick={() => {
             store.addAnimation({
               id: getUid(),

@@ -15,7 +15,7 @@ export const TextResource = observer(
     return (
       <div className="m-[15px] flex flex-row items-center">
         <div
-          className="flex-1 px-2 py-1 text-black"
+          className="flex-1 px-2 py-1"
           style={{
             fontSize: `${fontSize}px`,
             fontWeight: `${fontWeight}`,
@@ -24,7 +24,7 @@ export const TextResource = observer(
           {sampleText}
         </div>
         <button
-          className="z-10 flex size-[32px] items-center justify-center rounded bg-[rgba(0,0,0,.25)] py-1 font-bold text-white hover:bg-black"
+          className="btn btn-primary z-10 flex size-[32px] items-center justify-center rounded bg-[rgba(0,0,0,.25)] !p-0 !py-1 font-bold text-white hover:bg-black"
           onClick={() =>
             store.addText({
               text: sampleText,
