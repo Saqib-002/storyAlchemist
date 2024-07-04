@@ -35,6 +35,14 @@ const Page = async () => {
           );
         })}
       </div>
+      {videosWithUrls.length === 0 && (
+        <div className="flex-center h-full">
+          <p className="text-wrap">
+            No videos found. create your own by going to create a new video
+            section
+          </p>
+        </div>
+      )}
     </ScrollArea>
   );
 };

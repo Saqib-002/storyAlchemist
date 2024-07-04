@@ -16,8 +16,7 @@ import CustomButton from "@/components/shared/CustomButton";
 import { useToast } from "@/components/ui/use-toast";
 import OptionDialogue from "./OptionDialogue";
 import { createVideo } from "@/lib/actions/video.action";
-import VideoPlayer from "@/components/shared/VideoPlayer";
-import { getPresignedUrl } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   prompt: z.string().min(2, "Enter a valid prompt").max(50),
@@ -28,14 +27,8 @@ interface Props {
 }
 function CreateVideo({ userId }: Props) {
   const { toast } = useToast();
+  const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const [preSignedUrl, setPreSignedUrl] = useState<{
-    url: string;
-    thumbUrl: string;
-  }>({
-    url: "",
-    thumbUrl: "",
-  });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -57,11 +50,21 @@ function CreateVideo({ userId }: Props) {
         }),
       });
       const result = await response.json();
-      const newVid = await createVideo({ ...result, user: userId });
+      console.log(result);
+      if (result.error) {
+        toast({
+          variant: "destructive",
+          description: result.error,
+        });
+        return;
+      }
+      const newVid = await createVideo({
+        ...result,
+        title: values.prompt,
+        user: userId,
+      });
       const newVideo = JSON.parse(newVid);
-      const url = await getPresignedUrl(newVideo.videos.final);
-      const thumbUrl = await getPresignedUrl(newVideo.images[0][0]);
-      setPreSignedUrl({ url, thumbUrl });
+      router.push(`/videos/${newVideo._id}`);
     } catch (error) {
       console.log(error);
     }
@@ -79,55 +82,45 @@ function CreateVideo({ userId }: Props) {
   };
   return (
     <div className="flex-center h-full">
-      {preSignedUrl.url !== "" ? (
-        <>
-          <VideoPlayer
-            videoSrc={preSignedUrl.url}
-            imgUrl={preSignedUrl.thumbUrl}
-            title=""
-          />
-        </>
-      ) : (
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex-center mx-auto w-max flex-col gap-4"
-          >
-            <FormField
-              control={form.control}
-              name="prompt"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Give me a simple prompt or detailed instructions"
-                      className="no-focus w-[600px] resize-none border-primary-200 bg-dark-600"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <CustomButton
-              style="nonary"
-              type="button"
-              onClick={() => handleSubmitPrompt()}
-              title="Create Video"
-              imgUrl="/icons/star.svg"
-              imgLoc="after"
-              otherClasses="self-end"
-            />
-            {isDialogOpen && (
-              <OptionDialogue
-                form={form}
-                isDialogOpen={isDialogOpen}
-                handleSubmitPrompt={handleSubmitPrompt}
-              />
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex-center mx-auto w-max flex-col gap-4"
+        >
+          <FormField
+            control={form.control}
+            name="prompt"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Textarea
+                    placeholder="Give me a simple prompt or detailed instructions"
+                    className="no-focus w-[600px] resize-none border-primary-200 bg-dark-600"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             )}
-          </form>
-        </Form>
-      )}
+          />
+          <CustomButton
+            style="nonary"
+            type="button"
+            onClick={() => handleSubmitPrompt()}
+            title="Create Video"
+            imgUrl="/icons/star.svg"
+            imgLoc="after"
+            otherClasses="self-end"
+          />
+          {isDialogOpen && (
+            <OptionDialogue
+              form={form}
+              isDialogOpen={isDialogOpen}
+              handleSubmitPrompt={handleSubmitPrompt}
+            />
+          )}
+        </form>
+      </Form>
     </div>
   );
 }

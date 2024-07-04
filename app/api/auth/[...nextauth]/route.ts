@@ -34,7 +34,6 @@ export const authOptions: AuthOptions = {
             name: user.username,
           });
         }
-        console.log("credentials", credentials);
         return null;
       },
     }),

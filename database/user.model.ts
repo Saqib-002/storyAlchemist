@@ -6,6 +6,7 @@ export interface IUser extends Document {
   username: string;
   email: string;
   password?: string;
+  credits: number;
   joinedAt: Date;
 }
 
@@ -29,6 +30,7 @@ const UserSchema = new Schema({
   password: {
     type: String,
   },
+  credits: { type: Number, default: 5 },
   joinedAt: { type: Date, default: Date.now },
 });
 const User = models.User || model("User", UserSchema);

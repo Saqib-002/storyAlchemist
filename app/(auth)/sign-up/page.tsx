@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -18,8 +18,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import CustomButton from "@/components/shared/CustomButton";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   firstName: z.string(),
@@ -47,9 +48,22 @@ const formSchema = z.object({
       message: "password must be at less than 30 characters.",
     }),
 });
-
+function checkPassword(password: string) {
+  // Regular expression explanation:
+  // ^ - Matches the beginning of the string
+  // (?=.*[A-Z]) - Positive lookahead assertion that ensures at least one uppercase letter (A-Z)
+  // (?=.*[a-z]) - Positive lookahead assertion that ensures at least one lowercase letter (a-z)
+  // (?=.*\d) - Positive lookahead assertion that ensures at least one digit (0-9)
+  // (?=.*[!@#$%^&*()]) - Positive lookahead assertion that ensures at least one special character from the list
+  // .{8,} - Matches at least 8 characters (adjust the number as needed)
+  // $ - Matches the end of the string
+  const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()])(?=.{8,})/;
+  return regex.test(password);
+}
 const Page = () => {
   const { data: session } = useSession();
+  const [isTermsChecked, setIsTermsChecked] = useState<boolean>(false);
+  const { toast } = useToast();
   if (session) {
     redirect("/dashboard");
   }
@@ -69,6 +83,18 @@ const Page = () => {
     const { email, username, lastName, firstName, password, confirmPassword } =
       values;
     if (password !== confirmPassword) {
+      toast({
+        variant: "destructive",
+        description: "Password doesnt match",
+      });
+      return;
+    }
+    if (!checkPassword(password)) {
+      toast({
+        variant: "destructive",
+        description:
+          "Password must contain atleast 1 digit,1 uppercase, 1 lowercase letter,1 special character and atleast 8 characters long",
+      });
       return;
     }
     try {
@@ -88,6 +114,19 @@ const Page = () => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+      const res = await response.json();
+      console.log(res);
+      if (res.error) {
+        toast({
+          variant: "destructive",
+          description: res.error,
+        });
+        return;
+      }
+      toast({
+        variant: "default",
+        description: "Registered Successfully. Sign in please",
+      });
       // Process response here
       console.log("Registration Successful", response);
     } catch (error: any) {
@@ -206,6 +245,7 @@ const Page = () => {
                   <FormControl>
                     {/* <span className="input-gradient flex rounded-md p-px"> */}
                     <Input
+                      type="password"
                       placeholder="Password"
                       className="border border-solid !border-dark-500 bg-dark-600 text-dark-300 outline-none transition-all duration-300 ease-linear focus:shadow-input"
                       {...field}
@@ -228,6 +268,7 @@ const Page = () => {
                   <FormControl>
                     {/* <span className="input-gradient flex rounded-md p-px"> */}
                     <Input
+                      type="password"
                       placeholder="confirmPassword"
                       className="border border-solid !border-dark-500 bg-dark-600 text-dark-300 outline-none transition-all duration-300 ease-linear focus:shadow-input"
                       {...field}
@@ -238,9 +279,12 @@ const Page = () => {
                 </FormItem>
               )}
             />
-
             <span className="col-span-2 flex items-center gap-4">
-              <Checkbox id="terms" className="border border-white" />
+              <Checkbox
+                id="terms"
+                className="border border-white"
+                onCheckedChange={() => setIsTermsChecked(!isTermsChecked)}
+              />
               <label
                 htmlFor="terms"
                 className="text-sm font-medium leading-none text-light-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -250,6 +294,9 @@ const Page = () => {
               </label>
             </span>
             <CustomButton
+              otherProps={{
+                disabled: !isTermsChecked,
+              }}
               type="submit"
               title="Sign Up"
               style="ocotonary"
@@ -261,6 +308,11 @@ const Page = () => {
             <Button
               type="button"
               className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500 max-lg:col-span-2"
+              onClick={() =>
+                signIn("google", {
+                  callbackUrl: "http://localhost:3000/dashboard",
+                })
+              }
             >
               <Image
                 src="/icons/google.svg"
@@ -274,6 +326,11 @@ const Page = () => {
             <Button
               type="button"
               className="h-max bg-dark-600 py-4 text-dark-300 transition-all duration-200 hover:bg-dark-700 hover:text-dark-200 active:bg-dark-500 max-lg:col-span-2"
+              onClick={() =>
+                signIn("github", {
+                  callbackUrl: "http://localhost:3000/dashboard",
+                })
+              }
             >
               <Image
                 src="/icons/github.svg"

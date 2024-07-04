@@ -4,7 +4,10 @@ export interface IVideo extends Document {
   user: Schema.Types.ObjectId;
   images: Schema.Types.Array;
   audios: Schema.Types.Array;
+  scripts: Schema.Types.Array;
   videos: Object;
+  title: string;
+  introImg: string;
   createdAt: Date;
 }
 
@@ -19,6 +22,15 @@ const VideoSchema = new Schema({
   },
   audios: {
     type: Schema.Types.Array,
+  },
+  scripts: {
+    type: Schema.Types.Array,
+  },
+  title: {
+    type: String,
+  },
+  introImg: {
+    type: String,
   },
   videos: {
     type: Object,

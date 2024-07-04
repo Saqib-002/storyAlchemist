@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input";
 import CustomButton from "@/components/shared/CustomButton";
 import Image from "next/image";
 import Link from "next/link";
-import { NextRequest } from "next/server";
 import { redirect } from "next/navigation";
 
 const formSchema = z.object({
@@ -34,7 +33,9 @@ const formSchema = z.object({
     }),
 });
 
-const Page = (req: NextRequest) => {
+const Page = () => {
+  const [error, setError] = useState<string>("");
+
   const { data: session } = useSession();
   if (session) {
     redirect("/dashboard");
@@ -57,8 +58,10 @@ const Page = (req: NextRequest) => {
         password,
         redirect: false,
       });
-      console.log({ response });
-
+      if (response.status === 401) {
+        setError("Invalid email or password");
+        return;
+      }
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -116,6 +119,7 @@ const Page = (req: NextRequest) => {
                   <FormControl>
                     {/* <span className="input-gradient flex rounded-md p-px"> */}
                     <Input
+                      type="password"
                       placeholder="Password"
                       className="border border-solid !border-dark-500 bg-dark-600 text-dark-300 outline-none transition-all duration-300 ease-linear focus:shadow-input"
                       {...field}
@@ -126,6 +130,7 @@ const Page = (req: NextRequest) => {
                 </FormItem>
               )}
             />
+            <span className="col-span-2 text-center text-red-500">{error}</span>
             <CustomButton
               type="submit"
               title="Sign In"

@@ -23,6 +23,7 @@ interface Props {
   imgClasses?: string;
   imgLoc?: "before" | "after";
   onClick?: () => void;
+  otherProps?: any;
 }
 const CustomButton = ({
   style,
@@ -33,6 +34,7 @@ const CustomButton = ({
   imgUrl,
   imgClasses,
   imgLoc,
+  otherProps,
   onClick,
 }: Props) => {
   return (
@@ -43,6 +45,7 @@ const CustomButton = ({
         </Link>
       ) : (
         <button
+          {...otherProps}
           className={`btn no-focus group  ${"btn-" + style} ${otherClasses} ${imgUrl ? "flex items-center gap-2" : ""} ${imgLoc === "after" ? "flex-row-reverse" : ""}`}
           onClick={onClick}
           type={type}
