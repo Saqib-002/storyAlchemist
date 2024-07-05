@@ -8,7 +8,7 @@ import {
 
 const Faqs = () => {
   return (
-    <section className="p-8 md:px-20">
+    <section id="faqs" className="p-8 md:px-20">
       <h1 className="h1-bold text-center text-dark-100">Any Questions?</h1>
       <p className="paragraph-regular mx-auto my-10 max-w-[800px] text-dark-100">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur a

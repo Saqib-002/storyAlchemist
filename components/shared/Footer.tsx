@@ -18,16 +18,36 @@ const Footer = () => {
           <h1 className="h2-semibold">About Documentrio</h1>
           <ul className="flex flex-col gap-6">
             <li>
-              <Link href="/">About</Link>
+              <Link
+                href="/"
+                className="transition-colors duration-200 hover:text-primary-200"
+              >
+                About
+              </Link>
             </li>
             <li>
-              <Link href="/">Register</Link>
+              <Link
+                href="/sign-up"
+                className="transition-colors duration-200 hover:text-primary-200"
+              >
+                Register
+              </Link>
             </li>
             <li>
-              <Link href="/">Sign In</Link>
+              <Link
+                href="/sign-in"
+                className="transition-colors duration-200 hover:text-primary-200"
+              >
+                Sign In
+              </Link>
             </li>
             <li>
-              <Link href="/">Contact</Link>
+              <Link
+                href="/contact"
+                className="transition-colors duration-200 hover:text-primary-200"
+              >
+                Contact
+              </Link>
             </li>
           </ul>
         </div>
@@ -35,16 +55,36 @@ const Footer = () => {
           <h1 className="h2-semibold">Support</h1>
           <ul className="flex flex-col gap-6">
             <li>
-              <Link href="/">Privacy Policy</Link>
+              <Link
+                href="/"
+                className="transition-colors duration-200 hover:text-primary-200"
+              >
+                Privacy Policy
+              </Link>
             </li>
             <li>
-              <Link href="/">Terms & Conditions</Link>
+              <Link
+                href="/"
+                className="transition-colors duration-200 hover:text-primary-200"
+              >
+                Terms & Conditions
+              </Link>
             </li>
             <li>
-              <Link href="/">Cookie Policy</Link>
+              <Link
+                href="/"
+                className="transition-colors duration-200 hover:text-primary-200"
+              >
+                Cookie Policy
+              </Link>
             </li>
             <li>
-              <Link href="/">FAQs</Link>
+              <Link
+                href="#faqs"
+                className="transition-colors duration-200 hover:text-primary-200"
+              >
+                FAQs
+              </Link>
             </li>
           </ul>
         </div>

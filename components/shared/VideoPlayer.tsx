@@ -7,9 +7,10 @@ interface Props {
   videoSrc: string;
   imgUrl?: string;
   title: string;
+  createdAt?: Date;
 }
 
-const VideoPlayer = ({ ref, videoSrc, imgUrl, title }: Props) => {
+const VideoPlayer = ({ ref, videoSrc, imgUrl, title, createdAt }: Props) => {
   const [hasWindow, setHasWindow] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -31,7 +32,7 @@ const VideoPlayer = ({ ref, videoSrc, imgUrl, title }: Props) => {
         <div
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="size-max cursor-pointer transition-transform duration-300  hover:scale-105 [&>div]:size-max [&>div]:overflow-hidden [&>div]:rounded-lg"
+          className="cursor-pointer transition-transform duration-300  hover:scale-105 [&>div]:!w-[400px]  [&>div]:overflow-hidden [&>div]:rounded-lg max-sm:[&>div]:!h-[200px] max-sm:[&>div]:!w-[250px]"
         >
           <ReactPlayer
             ref={ref}
@@ -55,7 +56,19 @@ const VideoPlayer = ({ ref, videoSrc, imgUrl, title }: Props) => {
             pip={true}
           />
           <source src={videoSrc} type="video/mp4" />
-          {title && <p className="my-4 text-center text-light-400">{title}</p>}
+          {title && (
+            <div className="flex justify-between">
+              <p className="my-4 line-clamp-1 h-min w-[70%] text-light-400">
+                {title}
+              </p>
+              {createdAt && (
+                <p className="my-4 line-clamp-1 text-light-400">
+                  {createdAt.getDate()}/{createdAt.getMonth()}/
+                  {createdAt.getFullYear()}
+                </p>
+              )}
+            </div>
+          )}
         </div>
       )}
     </>

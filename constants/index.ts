@@ -16,6 +16,11 @@ export const sidebarLinks: SidebarLink[] = [
     route: "/videos",
     label: "My Videos",
   },
+  {
+    imgURL: "/icons/add.svg",
+    route: "/createNew",
+    label: "Create New Video",
+  },
 ];
 export const AUDIOS = [
   {

@@ -7,7 +7,11 @@ import SocialLink from "./SocialLink";
 
 const MobileNav = ({ isNavOpen, setIsNavOpen }: any) => {
   return (
-    <nav className=" absolute z-30 size-full max-h-fit bg-dark-500  lg:hidden">
+    <nav
+      className=" absolute z-30 size-full max-h-fit bg-dark-500  lg:hidden"
+      onMouseEnter={(e) => e.preventDefault()}
+      onMouseLeave={(e) => e.preventDefault()}
+    >
       <AnimatePresence>
         <motion.div
           layoutScroll
@@ -52,25 +56,25 @@ const MobileNav = ({ isNavOpen, setIsNavOpen }: any) => {
           <div className="flex-center mt-4 gap-4 py-4">
             <SocialLink
               href="/"
-              src="/icons/close.svg"
+              src="/icons/facebook.svg"
               alt="facebook"
               delay={0.5}
             />
             <SocialLink
               href="/"
-              src="/icons/close.svg"
+              src="/icons/twitter.svg"
               alt="tweeter"
               delay={0.6}
             />
             <SocialLink
               href="/"
-              src="/icons/close.svg"
+              src="/icons/instagram.svg"
               alt="instagram"
               delay={0.7}
             />
             <SocialLink
               href="/"
-              src="/icons/close.svg"
+              src="/icons/linkedin.svg"
               alt="linkedIn"
               delay={0.8}
             />

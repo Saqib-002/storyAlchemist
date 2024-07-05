@@ -24,7 +24,13 @@ const SocialLink = ({ href, src, alt, delay }: Props) => {
       initial={"close"}
     >
       <Link href={href}>
-        <Image src={src} alt={alt} width={16} height={16} />
+        <Image
+          src={src}
+          alt={alt}
+          width={16}
+          height={16}
+          className="!h-[16px]"
+        />
       </Link>
     </motion.div>
   );

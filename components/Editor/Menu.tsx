@@ -13,12 +13,27 @@ import {
   MdMovieFilter,
 } from "react-icons/md";
 import { Store } from "@/store/Store";
+import Link from "next/link";
+import Image from "next/image";
 
 export const Menu = observer(() => {
   const store = React.useContext(StoreContext);
 
   return (
-    <ul className="h-full bg-primary-950">
+    <ul className="h-full bg-primary-950 max-lg:flex max-lg:flex-wrap">
+      <Link
+        href="/dashboard"
+        className="flex size-[72px] flex-col items-center justify-center gap-1 text-[0.6rem]"
+      >
+        <Image
+          src="/icons/dashboard.svg"
+          alt="dashboard"
+          width={20}
+          height={20}
+          className="invert-colors"
+        />
+        Dashboard
+      </Link>
       {MENU_OPTIONS.map((option) => {
         const isSelected = store.selectedMenuOption === option.name;
         return (

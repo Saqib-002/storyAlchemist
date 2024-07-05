@@ -11,15 +11,18 @@ const Page = async () => {
   const session = await getServerSession();
   const user = await getUserByEmail({ email: session?.user?.email });
   const videos = await getUserVideos({ userId: user._id.toString() });
+  console.log(videos);
   // Fetch all video and thumbnail URLs asynchronously
   const videosWithUrls = await Promise.all(
-    videos.map(async ({ videos, images, _id }) => {
+    videos.map(async ({ title, videos, images, _id, createdAt }) => {
       const url = await getPresignedUrl(videos.final);
       const thumbUrl = await getPresignedUrl(images[0][0]);
       return {
         videoSrc: url,
         imgUrl: thumbUrl,
         key: _id.toString(),
+        title,
+        createdAt: new Date(createdAt),
       };
     })
   );
@@ -27,10 +30,15 @@ const Page = async () => {
     <ScrollArea className="custom-scrollbar">
       <h2 className="h2-semibold pl-8">My Collection</h2>
       <div className="flex h-full flex-wrap justify-between gap-8 overflow-y-hidden p-8">
-        {videosWithUrls.map(({ videoSrc, imgUrl, key }) => {
+        {videosWithUrls.map(({ videoSrc, imgUrl, key, title, createdAt }) => {
           return (
             <Link key={key} href={`/videos/${key}`}>
-              <VideoPlayer videoSrc={videoSrc} imgUrl={imgUrl} title="Title" />
+              <VideoPlayer
+                videoSrc={videoSrc}
+                imgUrl={imgUrl}
+                title={title}
+                createdAt={createdAt}
+              />
             </Link>
           );
         })}

@@ -1,8 +1,7 @@
 import AvatarDropdown from "@/components/shared/AvatarDropdown";
 import CustomButton from "@/components/shared/CustomButton";
-import Sidebar from "@/components/shared/Navbar/Sidebar";
+import Sidebar, { MobileNav } from "@/components/shared/Navbar/Sidebar";
 import { Toaster } from "@/components/ui/toaster";
-import Link from "next/link";
 import React from "react";
 
 export default function RootLayout({
@@ -18,15 +17,14 @@ export default function RootLayout({
           <p>Documentrio</p>
           <div className="flex h-max gap-4">
             <CustomButton
+              otherClasses="max-xs:hidden"
               imgUrl="/icons/upgrade.svg"
               style="secondary"
               title="upgrade"
               imgClasses="invert"
             />
-            <Link href="/dashboard" className="btn btn-secondary">
-              Create new
-            </Link>
             <AvatarDropdown />
+            <MobileNav />
           </div>
         </div>
         {children}

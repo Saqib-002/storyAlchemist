@@ -56,10 +56,7 @@ export const Navbar = () => {
         </ul>
         <div className="flex-center gap-6 ">
           {session ? (
-            <AvatarDropdown
-              imgSrc={session?.user?.image}
-              username={session?.user?.name}
-            />
+            <AvatarDropdown />
           ) : (
             <CustomButton
               style="secondary"

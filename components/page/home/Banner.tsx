@@ -1,6 +1,7 @@
 import React from "react";
 import CustomButton from "@/components/shared/CustomButton";
 import Image from "next/image";
+import Link from "next/link";
 const Banner = () => {
   return (
     <section className="relative z-10 h-screen w-full">
@@ -22,7 +23,9 @@ const Banner = () => {
           AI-generated scripts and voice-overs, showcasing your creativity. you
           can also modify it in the editor
         </p>
-        <CustomButton style="senary" type="button" title="Get Started" />
+        <Link href="/sign-up">
+          <CustomButton style="senary" type="button" title="Get Started" />
+        </Link>
       </div>
     </section>
   );

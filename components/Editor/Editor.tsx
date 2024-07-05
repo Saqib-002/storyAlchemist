@@ -59,11 +59,11 @@ export const Editor = observer(() => {
     };
   }, []);
   return (
-    <div className="grid h-svh grid-cols-[max-content_300px_auto_250px] grid-rows-[500px_1fr]">
-      <div className="row-span-2 flex flex-col">
+    <div className="h-svh grid-cols-[max-content_300px_auto_250px] grid-rows-[500px_1fr] max-lg:flex max-lg:flex-col max-lg:overflow-y-scroll lg:grid">
+      <div className="flex lg:row-span-2 lg:flex-col">
         <Menu />
       </div>
-      <div className="row-span-2 flex flex-col overflow-scroll">
+      <div className="row-span-2 flex flex-col overflow-scroll bg-primary-800 max-lg:pb-4">
         <Resources />
       </div>
       <div

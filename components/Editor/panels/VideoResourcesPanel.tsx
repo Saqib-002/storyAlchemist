@@ -14,7 +14,7 @@ export const VideoResourcesPanel = observer(() => {
   };
   return (
     <>
-      <div className="px-[16px] pb-[8px] pt-[16px] text-sm font-semibold">
+      <div className="overflow-y-scroll px-[16px] pb-[8px] pt-[16px] text-sm font-semibold">
         Videos
       </div>
       {store.videos.map((video, index) => {

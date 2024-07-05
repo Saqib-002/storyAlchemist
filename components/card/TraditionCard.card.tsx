@@ -4,6 +4,7 @@ import React from "react";
 import CustomButton from "../shared/CustomButton";
 import { traditionVariants } from "@/lib/animation";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface Props {
   title: string;
@@ -49,12 +50,14 @@ const TraditionCard = ({
             <li key={point}>{point}</li>
           ))}
         </ul>
-        <CustomButton
-          style={`${btnStyle || "nonary"}`}
-          type={`${btnType || "button"}`}
-          title={btnTitle}
-          otherClasses="w-fit mt-auto"
-        />
+        <Link href="about-us">
+          <CustomButton
+            style={`${btnStyle || "nonary"}`}
+            type={`${btnType || "button"}`}
+            title={btnTitle}
+            otherClasses="w-fit mt-auto"
+          />
+        </Link>
       </div>
     </motion.div>
   );

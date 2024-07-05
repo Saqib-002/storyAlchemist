@@ -31,13 +31,15 @@ const AvatarDropdown = () => {
         <DropdownMenuContent className="mt-2 border-primary-300  bg-primary-900 text-light-700">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator className="bg-primary-300" />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/profile">Profile</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/dashboard">Dashboard</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Team</DropdownMenuItem>
-          <DropdownMenuItem>Subscription</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/createNew">Create a video</Link>
+          </DropdownMenuItem>
           <DropdownMenuSeparator className="bg-primary-300" />
           <DropdownMenuItem className="p-0">
             <button
@@ -59,7 +61,7 @@ const AvatarDropdown = () => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <span className="ml-3">{user?.name}</span>
+      <span className="ml-3 max-sm:hidden">{user?.name}</span>
     </div>
   );
 };

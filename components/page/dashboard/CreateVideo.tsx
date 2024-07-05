@@ -29,6 +29,7 @@ function CreateVideo({ userId }: Props) {
   const { toast } = useToast();
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [isCreating, setIsCreating] = useState<boolean>(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,6 +40,7 @@ function CreateVideo({ userId }: Props) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      setIsCreating(true);
       const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/`, {
         method: "POST",
         headers: {
@@ -67,6 +69,12 @@ function CreateVideo({ userId }: Props) {
       router.push(`/videos/${newVideo._id}`);
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        description: "Server not responding",
+      });
+    } finally {
+      setIsCreating(false);
     }
   }
   const handleSubmitPrompt = () => {
@@ -95,7 +103,7 @@ function CreateVideo({ userId }: Props) {
                 <FormControl>
                   <Textarea
                     placeholder="Give me a simple prompt or detailed instructions"
-                    className="no-focus w-[600px] resize-none border-primary-200 bg-dark-600"
+                    className="no-focus resize-none border-primary-200 bg-dark-600 xs:w-[300px] md:w-[600px]"
                     {...field}
                   />
                 </FormControl>
@@ -114,6 +122,7 @@ function CreateVideo({ userId }: Props) {
           />
           {isDialogOpen && (
             <OptionDialogue
+              isLoading={isCreating}
               form={form}
               isDialogOpen={isDialogOpen}
               handleSubmitPrompt={handleSubmitPrompt}
