@@ -11,16 +11,16 @@ import { TimeLine } from "./TimeLine";
 import { Store } from "@/store/Store";
 import "@/utils/fabric-util.ts";
 
-export const EditorWithStore = () => {
+export const EditorWithStore = ({ videoUrl }: { videoUrl: string }) => {
   const [store] = useState(new Store());
   return (
     <StoreContext.Provider value={store}>
-      <Editor></Editor>
+      <Editor videoUrl={videoUrl}></Editor>
     </StoreContext.Provider>
   );
 };
 
-export const Editor = observer(() => {
+export const Editor = observer(({ videoUrl }: { videoUrl: string }) => {
   const store = React.useContext(StoreContext);
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
   const animationFrameIdRef = useRef<number | null>(null);
@@ -30,6 +30,9 @@ export const Editor = observer(() => {
       width: document.getElementById("grid-canvas-container")?.clientWidth,
       backgroundColor: "#ededed",
     });
+    if (!store.videos.includes(videoUrl)) {
+      store.addVideoResource(videoUrl);
+    }
     fabric.Object.prototype.transparentCorners = false;
     fabric.Object.prototype.cornerColor = "#00a0f5";
     fabric.Object.prototype.cornerStyle = "circle";

@@ -26,7 +26,7 @@ const Page = ({ params }: ParamsProps) => {
   }, []);
   return (
     <div className="size-full">
-      <DynmicEditor />
+      <DynmicEditor videoUrl={videoUrl} />
     </div>
   );
 };

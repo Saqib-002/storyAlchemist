@@ -32,7 +32,7 @@ const VideoPlayer = ({ ref, videoSrc, imgUrl, title, createdAt }: Props) => {
         <div
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="cursor-pointer transition-transform duration-300  hover:scale-105 [&>div]:!w-[400px]  [&>div]:overflow-hidden [&>div]:rounded-lg max-sm:[&>div]:!h-[200px] max-sm:[&>div]:!w-[250px]"
+          className="cursor-pointer transition-transform duration-300  hover:scale-105 [&>div]:!w-[380px]  [&>div]:overflow-hidden [&>div]:rounded-lg max-sm:[&>div]:!h-[200px] max-sm:[&>div]:!w-[250px]"
         >
           <ReactPlayer
             ref={ref}
@@ -40,8 +40,8 @@ const VideoPlayer = ({ ref, videoSrc, imgUrl, title, createdAt }: Props) => {
               e.preventDefault();
             }}
             playing={isPlaying}
-            width="400px"
-            height="300px"
+            width="380px"
+            height="280px"
             url={videoSrc}
             controls={true}
             light={isPlaying ? "" : imgUrl}
