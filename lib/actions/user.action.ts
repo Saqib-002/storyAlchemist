@@ -7,9 +7,9 @@ type AmountType = {
 };
 
 const AMOUNT: AmountType = {
-  Basic: 5,
-  Pro: 10,
-  Org: 15,
+  price_1Pa56zSDEORYZxmyUmdvTjOB: 50,
+  price_1PaY7SSDEORYZxmyQQvxjXlL: 150,
+  price_1PaY7vSDEORYZxmyzLvR5piK: 350,
 };
 
 export async function createUser(userData: any) {
@@ -61,14 +61,14 @@ export async function deductUserCredits(params: any) {
 }
 export async function incUserCredits(params: {
   userId: string;
-  subPackage: string;
+  priceId: string;
 }) {
   try {
     await connectToDatabase();
-    const { userId, subPackage } = params;
+    const { userId, priceId } = params;
     const user = await User.updateOne(
       { _id: userId },
-      { $inc: { credits: AMOUNT[subPackage] } }
+      { $inc: { credits: AMOUNT[priceId] } }
     );
     revalidatePath("/dashboard");
     return JSON.stringify(user);

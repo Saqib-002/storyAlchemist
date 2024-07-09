@@ -6,15 +6,16 @@ import Subscription from "@/database/subscription.model";
 export async function createSubscription(params: any) {
   try {
     await connectToDatabase();
-    const { user, priceId } = params;
+    const { user, priceId, amount } = params;
     const now = new Date(); // Get the current date
-
+    const newAmount = amount / 100;
     // Add one month (months are 0-indexed, January is 0)
     const expiry = now.setMonth(now.getMonth() + 1);
 
     const newSubscription = await Subscription.create({
       user,
       priceId,
+      amount: newAmount,
       expiry,
     });
     revalidatePath("/pricing");
@@ -27,17 +28,16 @@ export async function createSubscription(params: any) {
 export async function getActiveSubscription(params: any) {
   try {
     await connectToDatabase();
-    const { user, subPackage } = params;
+    const { user, priceId } = params;
     const today = new Date(); // Get the current date
     const query = {
       user,
       expiry: { $gt: today },
-      subPackage,
+      priceId,
     };
 
     const subscription = await Subscription.find(query);
     revalidatePath("/");
-    console.log(subscription);
     return JSON.stringify(subscription);
   } catch (error) {
     console.log(error);

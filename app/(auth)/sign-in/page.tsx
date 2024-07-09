@@ -52,7 +52,6 @@ const Page = () => {
     const { email, password } = values;
 
     try {
-      console.log("As");
       const response: any = await signIn("credentials", {
         email,
         password,

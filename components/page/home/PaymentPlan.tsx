@@ -1,5 +1,14 @@
+import { getUserByEmail } from "@/lib/actions/user.action";
+import { getServerSession } from "next-auth/next";
 import React from "react";
-const PaymentPlan = () => {
+import SubscribeComponent from "./SubscribeComponent";
+import { redirect } from "next/navigation";
+const PaymentPlan = async () => {
+  const session = await getServerSession();
+  if (!session) {
+    redirect("/sign-in");
+  }
+  const user = await getUserByEmail({ email: session?.user?.email });
   return (
     <>
       <section className=" mt-24 overflow-hidden pt-16 text-dark-100/80">
@@ -90,20 +99,10 @@ const PaymentPlan = () => {
               </p>
 
               <div className="rounded-bl-lg border-t border-gray-300 p-6 text-center">
-                <button className="mt-auto flex w-full items-center rounded border-0 bg-gradient-to-r from-cyan-600 to-blue-500 px-4 py-2 text-white hover:bg-indigo-600 focus:outline-none">
-                  Subscribe
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="ml-auto size-4"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                  </svg>
-                </button>
+                <SubscribeComponent
+                  priceId="price_1Pa56zSDEORYZxmyUmdvTjOB"
+                  userId={user._id.toString()}
+                />
               </div>
             </div>
             <div className="relative mb-10 w-full rounded-lg border-2 border-cyan-500 lg:-mt-px lg:mb-0 lg:w-1/3">
@@ -161,20 +160,10 @@ const PaymentPlan = () => {
                 </svg>
               </p>
               <div className="border-t border-gray-300 p-6 text-center">
-                <button className="mt-auto flex w-full items-center rounded border-0 bg-gradient-to-r from-cyan-600 to-blue-500 px-4 py-2 text-white hover:bg-indigo-600 focus:outline-none">
-                  Subscribe
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="ml-auto size-4"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                  </svg>
-                </button>
+                <SubscribeComponent
+                  priceId="price_1PaY7SSDEORYZxmyQQvxjXlL"
+                  userId={user._id.toString()}
+                />
                 <p className="mt-3 text-xs text-dark-100/80">
                   Please Review our Terms & Conditions before buying.
                 </p>
@@ -232,20 +221,10 @@ const PaymentPlan = () => {
                 </svg>
               </p>
               <div className="border-t border-gray-300 p-6 text-center">
-                <button className="mt-auto flex w-full items-center rounded border-0 bg-gradient-to-r from-cyan-600 to-blue-500 px-4 py-2 text-white hover:bg-indigo-600 focus:outline-none">
-                  Subscribe
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="ml-auto size-4"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                  </svg>
-                </button>
+                <SubscribeComponent
+                  priceId="price_1PaY7vSDEORYZxmyzLvR5piK"
+                  userId={user._id.toString()}
+                />
                 <p className="mt-3 text-xs text-dark-100/80">
                   Please Review our Terms & Conditions before buying.
                 </p>

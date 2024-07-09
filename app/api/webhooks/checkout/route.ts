@@ -2,6 +2,7 @@ import Stripe from "stripe";
 import { NextRequest } from "next/server";
 import { headers } from "next/headers";
 import { createSubscription } from "@/lib/actions/subscription.action";
+import { incUserCredits } from "@/lib/actions/user.action";
 type METADATA = {
   userId: string;
   priceId: string;
@@ -45,7 +46,8 @@ export async function POST(request: NextRequest) {
   };
   console.log(transactionDetails);
   try {
-    await createSubscription({ user: userId, priceId });
+    await createSubscription({ user: userId, priceId, amount });
+    await incUserCredits({ userId, priceId });
     return Response.json({ error: "Server Error" });
   } catch (error) {
     return Response.json({ error: "Server Error" });
