@@ -1,10 +1,8 @@
 "use client";
 
 import React from "react";
-import CustomButton from "../shared/CustomButton";
 import { traditionVariants } from "@/lib/animation";
 import { motion } from "framer-motion";
-import Link from "next/link";
 
 interface Props {
   title: string;
@@ -39,7 +37,7 @@ const TraditionCard = ({
     <motion.div
       variants={traditionVariants[animateDir]}
       whileInView={"inView"}
-      className="before:img-gradient relative z-[2] w-full rounded-xl bg-[url('/images/traditional/t-one.png')] bg-cover bg-no-repeat  before:absolute  before:z-[1] before:size-full before:rounded-xl before:content-[''] md:min-w-[400px] lg:w-[45%]"
+      className="before:img-gradient relative z-[2] w-full rounded-xl before:absolute  before:z-[1] before:size-full before:rounded-xl before:content-[''] md:min-w-[400px] lg:w-[45%]"
       transition={{ duration: 0.5, type: "linear", delay: 0.1 }}
       initial={"initial"}
     >
@@ -50,14 +48,6 @@ const TraditionCard = ({
             <li key={point}>{point}</li>
           ))}
         </ul>
-        <Link href="about-us">
-          <CustomButton
-            style={`${btnStyle || "nonary"}`}
-            type={`${btnType || "button"}`}
-            title={btnTitle}
-            otherClasses="w-fit mt-auto"
-          />
-        </Link>
       </div>
     </motion.div>
   );

@@ -19,6 +19,7 @@ import { createVideo } from "@/lib/actions/video.action";
 import { useRouter } from "next/navigation";
 import AutoScrollCarousel from "@/components/shared/AutoScrollCarousel";
 import { createCreation } from "@/lib/actions/creation.action";
+import { deductUserCredits, getUserById } from "@/lib/actions/user.action";
 
 const formSchema = z.object({
   prompt: z.string().min(2, "Enter a valid prompt").max(50),
@@ -43,6 +44,14 @@ function CreateVideo({ userId }: Props) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsCreating(true);
+      const user = JSON.parse(await getUserById({ userId }));
+      if (user.credits < 3) {
+        toast({
+          variant: "destructive",
+          description: "Low Credits",
+        });
+        return;
+      }
       // const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/`, {
       //   next: { tags: ["videos"] },
       //   method: "POST",
@@ -69,13 +78,12 @@ function CreateVideo({ userId }: Props) {
       //   user: userId,
       // });
       // const newVideo = JSON.parse(newVid);
-      const creation = await createCreation({
+      await createCreation({
         user: userId,
         createdAt: Date.now(),
         creditsConsumed: 3,
       });
-      const parsedCreation = JSON.parse(creation);
-      console.log(parsedCreation);
+      await deductUserCredits({ userId });
       // router.push(`/videos/${newVideo._id}`);
     } catch (error) {
       console.log(error);

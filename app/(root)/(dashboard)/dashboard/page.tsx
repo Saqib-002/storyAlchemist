@@ -16,7 +16,7 @@ async function Dashboard() {
       <div className="flex gap-4 p-4 ">
         <div className="flex w-max gap-4 rounded-md border border-solid border-light-700 px-6 py-4">
           <div>
-            <h3 className="paragraph-semibold">Total Videos</h3>
+            <h1 className="paragraph-semibold">Total Videos</h1>
             <p className="h1-bold">{videos.length}</p>
             <p>videos generated</p>
           </div>

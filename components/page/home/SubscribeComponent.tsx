@@ -5,6 +5,7 @@ type props = {
   price: string;
   description: string;
   userId: string;
+  subPackage: string;
 };
 const SubscribeComponent = ({ priceId, price, description, userId }: props) => {
   const handleSubmit = async () => {

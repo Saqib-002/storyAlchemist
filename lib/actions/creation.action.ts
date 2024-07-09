@@ -6,7 +6,6 @@ import Creation from "@/database/creation.model";
 export async function createCreation(params: any) {
   try {
     await connectToDatabase();
-    // const {user,generatedAt,creditsConsumed}=params;
     const newCreation = await Creation.create({ ...params });
     revalidatePath("/dashboard");
     return JSON.stringify(newCreation);

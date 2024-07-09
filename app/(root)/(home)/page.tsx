@@ -1,19 +1,24 @@
-import Banner from "@/components/page/home/Banner";
-import Broadcast from "@/components/page/home/Broadcast";
 import Faqs from "@/components/page/home/Faqs";
 import VoiceBanner from "@/components/page/home/VoiceBanner";
-import AutoScrollCarousel from "@/components/shared/AutoScrollCarousel";
 import Tradition from "@/components/shared/Tradition";
+import HeroSection from "@/components/page/home/HeroSection";
+import FeaturedSection from "@/components/page/home/FeaturedSection";
+import Feature from "@/components/page/home/Feature";
+import PaymentPlan from "@/components/page/home/PaymentPlan";
+import CardGrid from "@/components/card/CardGrid";
+import StepsCard from "@/components/card/StepsCard";
 
 export default function Home() {
   return (
     <>
-      <Banner />
+      <HeroSection />
+      <FeaturedSection />
+      <Feature />
+      <StepsCard />
+      <CardGrid />
+      <PaymentPlan />
       <VoiceBanner />
       <Tradition />
-      <Broadcast />
-      <AutoScrollCarousel direction="forward" data={{}} />
-      <AutoScrollCarousel direction="backward" data={{}} />
       <Faqs />
     </>
   );

@@ -6,10 +6,11 @@ import React from "react";
 const page = async () => {
   const session = await getServerSession();
   const user = await getUserByEmail({ email: session?.user?.email });
-  console.log(user);
+
   return (
     <div className="pt-20 text-white">
       <SubscribeComponent
+        subPackage="Basic"
         priceId="price_1Pa56zSDEORYZxmyUmdvTjOB"
         price="5"
         description="sdfs"

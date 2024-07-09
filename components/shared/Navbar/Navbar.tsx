@@ -36,16 +36,20 @@ export const Navbar = () => {
       <nav
         className={`${scrollY! >= 100 ? "animate-header bg-primary-900 shadow-header" : ""} base-medium flex-between fixed left-0 top-0 z-20 w-full gap-4 px-8 py-6 text-dark-200 md:px-10 lg:px-12 xl:px-20`}
       >
-        <p className="h2-semibold !font-spaceGrotesk">Documentrio.</p>
+        <p className="h2-semibold !font-spaceGrotesk">
+          <Image
+            src="/images/logo-main.png"
+            width="180"
+            height="52"
+            alt="logo"
+          />
+        </p>
         <ul className="hidden gap-2 lg:flex xl:gap-4">
           <li>
             <CustomButton style="link" href="/" title="Home" />
           </li>
           <li>
             <CustomButton style="link" href="/about" title="About Us" />
-          </li>
-          <li>
-            <CustomButton style="link" href="/use-case" title="Use Case" />
           </li>
           <li>
             <CustomButton style="link" href="/contact" title="Contact" />

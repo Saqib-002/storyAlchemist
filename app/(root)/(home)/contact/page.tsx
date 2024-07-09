@@ -94,35 +94,35 @@ const Page = () => {
     form.reset();
   }
   return (
-    <div className="bg-white">
-      <header className="bg-green-700 py-12 text-center text-white">
+    <div className="">
+      <header className="py-12 text-center text-white">
         <h1 className="mt-16 text-4xl font-bold">Contact Us</h1>
       </header>
       <section className="px-4 py-12 text-center">
-        <h2 className="text-2xl font-bold">Get In Touch</h2>
-        <p className="mx-auto mt-4 max-w-2xl text-gray-700">
+        <h2 className="text-2xl font-bold text-white">Get In Touch</h2>
+        <p className="mx-auto mt-4 max-w-2xl text-white">
           We are here to help you. Reach out to us via any of the following
           methods.
         </p>
-        <div className="animate-fadeIn mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
-          <div className="rounded-lg bg-green-100 p-4 shadow-lg transition-colors hover:bg-green-200">
+        <div className=" mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
+          <div className="primary-gradient scale-90 rounded-lg border border-solid border-cyan-500 p-4 text-light-800  shadow-md  transition-colors hover:scale-100">
             <h3 className="text-xl font-bold">Call Us</h3>
-            <p className="mt-2 text-gray-700">+1 123 456 7890</p>
+            <p className="mt-2">+1 123 456 7890</p>
           </div>
-          <div className="rounded-lg bg-green-100 p-4 shadow-lg transition-colors hover:bg-green-200">
+          <div className="primary-gradient scale-90 rounded-lg border border-solid border-cyan-500 p-4 text-light-800 shadow-md transition-colors hover:scale-100">
             <h3 className="text-xl font-bold">Email Us</h3>
-            <p className="mt-2 text-gray-700">contact@wisedoctors.com</p>
+            <p className="mt-2">contact@wisedoctors.com</p>
           </div>
-          <div className="rounded-lg bg-green-100 p-4 shadow-lg transition-colors hover:bg-green-200">
+          <div className="primary-gradient scale-90 rounded-lg border border-solid border-cyan-500 p-4 text-light-800 shadow-md transition-colors hover:scale-100">
             <h3 className="text-xl font-bold">Visit Us</h3>
-            <p className="mt-2 text-gray-700">123 Health St, Wellness City</p>
+            <p className="mt-2">123 Health St, Wellness City</p>
           </div>
         </div>
       </section>
-      <div className="flex min-h-screen flex-col justify-center bg-gray-800 py-6 sm:py-12">
+      <div className="primary-gradient flex min-h-screen flex-col justify-center py-6 sm:py-12">
         <div className="relative py-3 sm:mx-auto sm:max-w-xl">
-          <div className="absolute inset-0 -skew-y-6 bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg sm:-rotate-6 sm:skew-y-0 sm:rounded-3xl"></div>
-          <div className="relative bg-dayBlue-500 px-4 py-10 text-white shadow-lg sm:rounded-3xl sm:p-20">
+          <div className="absolute inset-0 -skew-y-6 bg-gradient-to-r from-cyan-700 to-blue-700 shadow-lg sm:-rotate-6 sm:skew-y-0 sm:rounded-3xl"></div>
+          <div className="relative bg-gradient-to-r from-cyan-600 to-blue-600 px-4 py-10 text-white shadow-lg sm:rounded-3xl sm:p-20">
             <div className="pb-6 text-center">
               <h1 className="text-3xl">Contact Us!</h1>
 
@@ -143,7 +143,7 @@ const Page = () => {
                       <FormControl>
                         <Input
                           placeholder="Name"
-                          className="border border-solid !border-dark-500 bg-dark-600 text-dark-300 outline-none transition-all duration-300 ease-linear focus:shadow-input"
+                          className="border border-solid !border-dark-800 bg-light-900 text-dark-600 outline-none transition-all duration-300 ease-linear focus:shadow-input"
                           {...field}
                         />
                       </FormControl>
@@ -159,7 +159,7 @@ const Page = () => {
                       <FormControl>
                         <Input
                           placeholder="Email"
-                          className="border border-solid !border-dark-500 bg-dark-600 text-dark-300 outline-none transition-all duration-300 ease-linear focus:shadow-input"
+                          className="border border-solid !border-dark-800 bg-light-900 text-dark-600 outline-none transition-all duration-300 ease-linear focus:shadow-input"
                           {...field}
                         />
                       </FormControl>
@@ -175,7 +175,7 @@ const Page = () => {
                       <FormControl>
                         <Input
                           placeholder="Subject"
-                          className="border border-solid !border-dark-500 bg-dark-600 text-dark-300 outline-none transition-all duration-300 ease-linear focus:shadow-input"
+                          className="border border-solid !border-dark-800 bg-light-900 text-dark-600 outline-none transition-all duration-300 ease-linear focus:shadow-input"
                           {...field}
                         />
                       </FormControl>
@@ -191,7 +191,7 @@ const Page = () => {
                       <FormControl>
                         <Textarea
                           placeholder="Message"
-                          className="resize-none border border-solid !border-dark-500 bg-dark-600 text-dark-300 outline-none transition-all duration-300 ease-linear focus:shadow-input"
+                          className="resize-none  !border-dark-200 bg-light-900 text-dark-600 outline-none transition-all duration-300 ease-linear focus:shadow-input focus-visible:!ring-transparent"
                           {...field}
                         />
                       </FormControl>
@@ -202,7 +202,7 @@ const Page = () => {
                 <div className="flex justify-between gap-4">
                   <Button
                     type="button"
-                    className="bg-red-700 text-red-50 hover:bg-red-900"
+                    className="bg-red-600 text-red-50 hover:bg-red-800"
                     onClick={resetForm}
                   >
                     Reset
@@ -215,42 +215,34 @@ const Page = () => {
           </div>
         </div>
       </div>
-      <section className="px-4 py-12 text-center">
+      <section className="px-4 py-12 text-center text-light-800">
         <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
         <div className="mt-8">
-          <div className="scale-90 rounded-lg border p-4 shadow-md transition hover:scale-100">
-            <h3 className="text-xl font-bold">
+          <div className="scale-90 rounded-lg border border-cyan-500 p-4 shadow-md transition hover:scale-95">
+            <h3 className="text-xl font-bold text-light-800">
               What are your operating hours?
             </h3>
-            <p className="mt-2 text-gray-700">
+            <p className="mt-2 text-light-800">
               We operate from 9 AM to 5 PM, Monday to Friday.
             </p>
           </div>
-          <div className="mt-4 scale-90 rounded-lg border p-4 shadow-md transition hover:scale-100">
+          <div className="mt-4 scale-90 rounded-lg border border-cyan-500 p-4 text-light-800 shadow-md transition hover:scale-95">
             <h3 className="text-xl font-bold">
               How can I book an appointment?
             </h3>
-            <p className="mt-2 text-gray-700">
+            <p className="mt-2">
               You can book an appointment through our website or by calling our
               office.
             </p>
           </div>
-          <div className="mt-4 scale-90 rounded-lg border p-4 shadow-md transition hover:scale-100">
+          <div className="mt-4 scale-90 rounded-lg border border-cyan-500 p-4 text-light-800 shadow-md transition hover:scale-95">
             <h3 className="text-xl font-bold">
               Do you offer telemedicine services?
             </h3>
-            <p className="mt-2 text-gray-700">
-              Yes, we offer telemedicine consultations.
-            </p>
+            <p className="mt-2">Yes, we offer telemedicine consultations.</p>
           </div>
         </div>
       </section>
-      <footer className="bg-green-700 py-8 text-center text-white">
-        <p>
-          &copy; Copyright Your Company Name 2024 . All rights reserved. Made By
-          Binary Boats⛵.
-        </p>
-      </footer>
     </div>
   );
 };
