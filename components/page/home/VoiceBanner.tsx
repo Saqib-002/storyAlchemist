@@ -32,20 +32,22 @@ const VoiceBanner = () => {
         Generate the video with your own voice tone and any language you want
       </p>
       <div className="relative z-10 mt-10 px-4  py-8 pt-14 before:absolute before:left-[5%] before:top-0 before:z-[-1] before:h-[105%] before:w-[90%] before:rounded-2xl before:bg-primary-850 before:content-['']">
-        <div className="no-scrollbar flex justify-center gap-4 overflow-x-scroll">
+        <div className="no-scrollbar flex justify-center gap-4 overflow-x-scroll pl-60">
           {AUDIOS.map(({ src, value, label }, idx) => (
             <div
               className="flex w-fit flex-col items-center justify-between gap-4 rounded-lg bg-primary-200 p-8"
               key={value}
             >
               <Image
-                src={`/images/${value === "hope" ? "female.png" : "male.png"}`}
+                src={`/images/${value === "hope" || value === "nina" ? "female.png" : "male.png"}`}
                 alt="voice.png"
                 width={200}
                 height={250}
                 className="!h-[250px] min-h-[250px] min-w-[180px] object-cover"
               />
-              <p className="base-semibold  w-fit !font-spaceGrotesk">{label}</p>
+              <p className="base-semibold  w-fit text-center !font-spaceGrotesk">
+                {label}
+              </p>
               <audio
                 ref={(element) => {
                   audioRefs.current[idx] = element;

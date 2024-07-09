@@ -14,12 +14,12 @@ const Footer = async () => {
           <h1 className="h2-semibold">
             <Image
               src="/images/logo-main.png"
-              width="180"
+              width="96"
               height="52"
               alt="logo"
             />
           </h1>
-          <p className="paragraph-regular">
+          <p className="paragraph-regular text-justify">
             Experience the power of cutting-edge AI technology to create
             compelling, high-quality documentary videos.
           </p>
@@ -81,7 +81,15 @@ const Footer = async () => {
                 href="/terms-of-use"
                 className="transition-colors duration-200 hover:text-primary-200"
               >
-                Terms & Conditions
+                Terms of use
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/pricing"
+                className="transition-colors duration-200 hover:text-primary-200"
+              >
+                Pricing
               </Link>
             </li>
             <li>

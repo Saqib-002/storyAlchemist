@@ -2,12 +2,8 @@ import { getUserByEmail } from "@/lib/actions/user.action";
 import { getServerSession } from "next-auth/next";
 import React from "react";
 import SubscribeComponent from "./SubscribeComponent";
-import { redirect } from "next/navigation";
 const PaymentPlan = async () => {
   const session = await getServerSession();
-  if (!session) {
-    redirect("/sign-in");
-  }
   const user = await getUserByEmail({ email: session?.user?.email });
   return (
     <>
@@ -16,7 +12,7 @@ const PaymentPlan = async () => {
           <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-dark-100/80 dark:text-white">
             Designed for business teams like yours
           </h2>
-          <p className="mb-5 font-light dark:text-dark-100/80 sm:text-xl">
+          <p className="mb-5 text-justify font-light dark:text-dark-100/80 sm:text-xl">
             Here at Documentrio, we focus on providing innovative AI solutions
             to create documentary-style videos from user prompts, complete with
             script generation and voice-over, unlocking long-term value and
@@ -39,7 +35,7 @@ const PaymentPlan = async () => {
                 Access to Support
               </p>
               <p className="flex h-12 items-center justify-start bg-primary-850 px-4 text-center text-dark-100/80">
-                Limited to Projects per Month
+                Credits
               </p>
               <p className="flex h-12 items-center justify-start px-4 text-center text-dark-100/80">
                 Watermarked Videos
@@ -49,11 +45,14 @@ const PaymentPlan = async () => {
           <div className="flex w-full flex-wrap rounded-lg border-gray-300 lg:w-3/4 lg:border">
             <div className="mb-10 w-full rounded-lg border-2 border-gray-300 lg:mb-0 lg:mt-px lg:w-1/3 lg:rounded-none lg:border-none">
               <div className="flex h-48 flex-col items-center justify-center px-2 text-center">
-                <h3 className="tracking-widest">START</h3>
-                <h2 className="mb-4 mt-2 text-5xl font-medium leading-none text-dark-100/80">
-                  Free
+                <h3 className="tracking-widest">BASIC</h3>
+                <h2 className="mb-4 mt-2 flex items-center justify-center text-5xl font-medium leading-none text-dark-100/80">
+                  $5
+                  <span className="ml-1 text-base text-dark-100/80">/mo</span>
                 </h2>
-                <span className="text-sm text-dark-100/80">Next 3 months</span>
+                <span className="text-sm text-dark-100/80">
+                  charging $60 per year
+                </span>
               </div>
               <p className="flex h-12 items-center justify-center border-t border-gray-300 bg-primary-850 text-center text-dark-100/80">
                 <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-white">
@@ -80,7 +79,7 @@ const PaymentPlan = async () => {
                 Community
               </p>
               <p className="flex h-12 items-center justify-center bg-primary-850 text-center leading-relaxed text-dark-100/80">
-                3
+                50
               </p>
               <p className="flex h-12 items-center justify-center text-center text-dark-100/80">
                 <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-white">
@@ -101,7 +100,7 @@ const PaymentPlan = async () => {
               <div className="rounded-bl-lg border-t border-gray-300 p-6 text-center">
                 <SubscribeComponent
                   priceId="price_1Pa56zSDEORYZxmyUmdvTjOB"
-                  userId={user._id.toString()}
+                  userId={user?._id?.toString()}
                 />
               </div>
             </div>
@@ -112,11 +111,11 @@ const PaymentPlan = async () => {
               <div className="flex h-48 flex-col items-center justify-center px-2 text-center">
                 <h3 className="tracking-widest">PRO</h3>
                 <h2 className="mb-4 mt-2 flex items-center justify-center text-5xl font-medium leading-none text-dark-100/80">
-                  $38
+                  $15
                   <span className="ml-1 text-base text-dark-100/80">/mo</span>
                 </h2>
                 <span className="text-sm text-dark-100/80">
-                  Charging $456 per year
+                  Charging $180 per year
                 </span>
               </div>
               <p className="flex h-12 items-center justify-center border-t border-gray-300 bg-primary-850 text-center text-dark-100/80">
@@ -144,7 +143,7 @@ const PaymentPlan = async () => {
                 Community & Priority
               </p>
               <p className="flex h-12 items-center justify-center bg-primary-850 text-center leading-relaxed text-dark-100/80">
-                10
+                150
               </p>
               <p className="flex h-12 items-center justify-center text-center text-dark-100/80">
                 <svg
@@ -162,7 +161,7 @@ const PaymentPlan = async () => {
               <div className="border-t border-gray-300 p-6 text-center">
                 <SubscribeComponent
                   priceId="price_1PaY7SSDEORYZxmyQQvxjXlL"
-                  userId={user._id.toString()}
+                  userId={user?._id?.toString()}
                 />
                 <p className="mt-3 text-xs text-dark-100/80">
                   Please Review our Terms & Conditions before buying.
@@ -173,11 +172,11 @@ const PaymentPlan = async () => {
               <div className="flex h-48 flex-col items-center justify-center px-2 text-center">
                 <h3 className="tracking-widest">BUSINESS</h3>
                 <h2 className="mb-4 mt-2 flex items-center justify-center text-5xl font-medium leading-none text-dark-100/80">
-                  $54
+                  $40
                   <span className="ml-1 text-base">/mo</span>
                 </h2>
                 <span className="text-sm text-dark-100/80">
-                  Charging $648 per year
+                  Charging $480 per year
                 </span>
               </div>
               <p className="flex h-12 items-center justify-center border-t border-gray-300 bg-primary-850 text-center text-dark-100/80">
@@ -205,7 +204,7 @@ const PaymentPlan = async () => {
                 Community & 24 / 7 Premium
               </p>
               <p className="flex h-12 items-center justify-center bg-primary-850 text-center leading-relaxed text-dark-100/80">
-                Unlimited
+                350
               </p>
               <p className="flex h-12 items-center justify-center text-center text-dark-100/80">
                 <svg
@@ -223,7 +222,7 @@ const PaymentPlan = async () => {
               <div className="border-t border-gray-300 p-6 text-center">
                 <SubscribeComponent
                   priceId="price_1PaY7vSDEORYZxmyzLvR5piK"
-                  userId={user._id.toString()}
+                  userId={user?._id?.toString()}
                 />
                 <p className="mt-3 text-xs text-dark-100/80">
                   Please Review our Terms & Conditions before buying.

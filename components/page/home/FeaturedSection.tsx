@@ -9,7 +9,7 @@ const FeaturedSection = () => {
             <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-dark-100 dark:text-dark-100">
               Create AI-Generated Documentaries with Ease
             </h2>
-            <p className="mb-8 font-light lg:text-xl">
+            <p className="mb-8 text-justify font-light lg:text-xl">
               Start producing captivating documentary videos effortlessly. Our
               AI-driven platform ensures each video is unique, informative, and
               tailored to your audience and topic.

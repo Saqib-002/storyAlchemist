@@ -1,6 +1,7 @@
 "use client";
 import { getActiveSubscription } from "@/lib/actions/subscription.action";
 import { loadStripe } from "@stripe/stripe-js";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 type props = {
   priceId: string;
@@ -8,6 +9,7 @@ type props = {
 };
 const SubscribeComponent = ({ priceId, userId }: props) => {
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
+  const router = useRouter();
   useEffect(() => {
     async function getSubscription() {
       const subscription = await getActiveSubscription({
@@ -22,6 +24,10 @@ const SubscribeComponent = ({ priceId, userId }: props) => {
     getSubscription();
   }, []);
   const handleSubmit = async () => {
+    if (!userId) {
+      router.push("/sign-in");
+      return;
+    }
     const stripe = await loadStripe(
       process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
     );

@@ -290,7 +290,7 @@ const Page = () => {
                 className="text-sm font-medium leading-none text-light-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
                 I agree with{" "}
-                <span className="text-dayBlue-600"> terms & conditions</span>
+                <span className="text-dayBlue-600"> terms of use</span>
               </label>
             </span>
             <CustomButton

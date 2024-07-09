@@ -36,7 +36,7 @@ const HeroSection = () => {
       <div className="relative z-10 mx-auto grid max-w-screen-xl px-4 pb-8 pt-20 lg:grid-cols-12 lg:gap-8 lg:py-16 lg:pt-28 xl:gap-0">
         <div className="mr-auto place-self-center lg:col-span-7">
           <GradientText />
-          <p className="mb-6 max-w-2xl text-dark-100/80 dark:text-dark-100/80 md:text-lg lg:mb-8 lg:text-xl">
+          <p className="mb-6 max-w-2xl text-justify text-dark-100/80 dark:text-dark-100/80 md:text-lg lg:mb-8 lg:text-xl">
             Experience the power of cutting-edge AI technology to create
             compelling, high-quality documentary videos. Whether you&#39;re an
             educator, content creator, or storyteller, our platform makes it

@@ -32,13 +32,19 @@ const AvatarDropdown = () => {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator className="bg-primary-300" />
           <DropdownMenuItem>
-            <Link href="/profile">Profile</Link>
+            <Link href="/profile" className="w-full">
+              Profile
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/dashboard">Dashboard</Link>
+            <Link href="/dashboard" className="w-full">
+              Dashboard
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/createNew">Create a video</Link>
+            <Link href="/createNew" className="w-full">
+              Create a video
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator className="bg-primary-300" />
           <DropdownMenuItem className="p-0">

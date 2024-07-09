@@ -39,7 +39,7 @@ export const Navbar = () => {
         <p className="h2-semibold !font-spaceGrotesk">
           <Image
             src="/images/logo-main.png"
-            width="180"
+            width="96"
             height="52"
             alt="logo"
           />

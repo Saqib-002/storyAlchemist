@@ -22,6 +22,16 @@ export async function createUser(userData: any) {
     throw error;
   }
 }
+export async function updateUser({ userId, updateData }: any) {
+  try {
+    await connectToDatabase();
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData);
+    return JSON.stringify(updatedUser);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
 export async function getUserByEmail(params: any) {
   try {
     await connectToDatabase();

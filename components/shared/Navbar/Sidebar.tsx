@@ -15,7 +15,7 @@ const Sidebar = () => {
   const pathname = usePathname();
   return (
     <>
-      <div className="flex w-max flex-col bg-dark-600 p-4 max-xs:hidden">
+      <div className="flex w-max flex-col border-r border-solid border-cyan-500 bg-primary-900 p-4 max-xs:hidden">
         {sidebarLinks.map(({ route, imgURL, label }) => {
           const isActive =
             (pathname.includes(route) && route.length > 1) ||

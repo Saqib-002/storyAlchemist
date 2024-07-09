@@ -176,6 +176,12 @@ code {
 
   /* background: linear-gradient(120deg #ade2f2 0%, #3269a4 15%, #69cac5 100%); */
 }
+.left-floating-gradient {
+  background: linear-gradient(to right, rgba(3, 25, 39, 1), rgba(3, 25, 39, 0));
+}
+.right-floating-gradient {
+  background: linear-gradient(to left, rgba(3, 25, 39, 1), rgba(3, 25, 39, 0));
+}
 .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
