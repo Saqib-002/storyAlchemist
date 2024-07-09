@@ -4,10 +4,12 @@ import { getUserByEmail } from "@/lib/actions/user.action";
 import { getUserVideos } from "@/lib/actions/video.action";
 import { getPresignedUrl } from "@/lib/utils";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import React from "react";
 
 const Page = async () => {
+  revalidatePath("/videos");
   const session = await getServerSession();
   const user = await getUserByEmail({ email: session?.user?.email });
   const videos = await getUserVideos({ userId: user._id.toString() });

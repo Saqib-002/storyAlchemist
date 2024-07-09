@@ -34,3 +34,14 @@ export async function getVideoById(params: any) {
     throw error;
   }
 }
+export async function deleteVideoById(params: any) {
+  try {
+    await connectToDatabase();
+    const { videoId } = params;
+    const deletedVideo = await Video.findByIdAndDelete(videoId);
+    return JSON.stringify(deletedVideo);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}

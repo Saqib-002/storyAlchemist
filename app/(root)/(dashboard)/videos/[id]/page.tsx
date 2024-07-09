@@ -1,14 +1,17 @@
 "use client";
 import VideoPlayer from "@/components/shared/VideoPlayer";
-import { getVideoById } from "@/lib/actions/video.action";
-import { getPresignedUrl } from "@/lib/utils";
+import { deleteVideoById, getVideoById } from "@/lib/actions/video.action";
+import { deleteObjectFromS3, getPresignedUrl } from "@/lib/utils";
 import { ParamsProps } from "@/types";
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const Page = ({ params }: ParamsProps) => {
   const [videoUrl, setVideoUrl] = useState("");
   const [thumbUrl, setThumbUrl] = useState("");
+  const router = useRouter();
   useEffect(() => {
     const getData = async () => {
       const videoResponse = await getVideoById({ videoId: params.id });
@@ -20,6 +23,15 @@ const Page = ({ params }: ParamsProps) => {
     };
     getData();
   }, []);
+  async function deleteVideo() {
+    const videoResponse = await getVideoById({ videoId: params.id });
+    const video = JSON.parse(videoResponse);
+    console.log(video);
+    await deleteObjectFromS3(video.videos.final);
+    const res = await deleteVideoById({ videoId: params.id });
+    console.log(res);
+    router.push("/videos");
+  }
   return (
     <div className="flex-center flex-col gap-8 p-8">
       <VideoPlayer videoSrc={videoUrl} imgUrl={thumbUrl} title="" />
@@ -36,6 +48,13 @@ const Page = ({ params }: ParamsProps) => {
         >
           Download
         </Link>
+        <button
+          type="button"
+          className="border border-solid border-red-500 px-2 transition-colors duration-300 hover:border-red-900"
+          onClick={deleteVideo}
+        >
+          <Image src="/icons/bin.svg" alt="del" width={20} height={20} />
+        </button>
       </div>
     </div>
   );

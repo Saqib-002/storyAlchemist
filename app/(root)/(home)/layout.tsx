@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/shared/Navbar/Navbar";
 import React from "react";
 import Footer from "@/components/shared/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function RootLayout({
   children,
@@ -12,6 +13,7 @@ export default function RootLayout({
       <Navbar />
       {children}
       <Footer />
+      <Toaster />
     </main>
   );
 }

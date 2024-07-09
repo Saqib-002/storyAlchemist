@@ -17,6 +17,8 @@ import { useToast } from "@/components/ui/use-toast";
 import OptionDialogue from "./OptionDialogue";
 import { createVideo } from "@/lib/actions/video.action";
 import { useRouter } from "next/navigation";
+import AutoScrollCarousel from "@/components/shared/AutoScrollCarousel";
+import { createCreation } from "@/lib/actions/creation.action";
 
 const formSchema = z.object({
   prompt: z.string().min(2, "Enter a valid prompt").max(50),
@@ -41,32 +43,40 @@ function CreateVideo({ userId }: Props) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsCreating(true);
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          ...values,
-        }),
-      });
-      const result = await response.json();
-      console.log(result);
-      if (result.error) {
-        toast({
-          variant: "destructive",
-          description: result.error,
-        });
-        return;
-      }
-      const newVid = await createVideo({
-        ...result,
-        title: values.prompt,
+      // const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/`, {
+      //   next: { tags: ["videos"] },
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     userId,
+      //     ...values,
+      //   }),
+      // });
+      // const result = await response.json();
+      // console.log(result);
+      // if (result.error) {
+      //   toast({
+      //     variant: "destructive",
+      //     description: result.error,
+      //   });
+      //   return;
+      // }
+      // const newVid = await createVideo({
+      //   ...result,
+      //   title: values.prompt,
+      //   user: userId,
+      // });
+      // const newVideo = JSON.parse(newVid);
+      const creation = await createCreation({
         user: userId,
+        createdAt: Date.now(),
+        creditsConsumed: 3,
       });
-      const newVideo = JSON.parse(newVid);
-      router.push(`/videos/${newVideo._id}`);
+      const parsedCreation = JSON.parse(creation);
+      console.log(parsedCreation);
+      // router.push(`/videos/${newVideo._id}`);
     } catch (error) {
       console.log(error);
       toast({
@@ -89,8 +99,12 @@ function CreateVideo({ userId }: Props) {
     }
   };
   return (
-    <div className="flex-center h-full">
+    <div className="flex size-full flex-col items-center justify-around">
       <Form {...form}>
+        <div className="w-[1024px]">
+          <AutoScrollCarousel direction="forward" data={{}} />
+          <AutoScrollCarousel direction="backward" data={{}} />
+        </div>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex-center mx-auto w-max flex-col gap-4"
